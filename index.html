@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>濟州島五天行程 6/26–6/30</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#F6F4EE">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="濟州島">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F6F4EE'/%3E%3Ccircle cx='32' cy='25' r='11' fill='%23E8742C'/%3E%3Cpath d='M5 45 Q19 36 32 45 T59 45 V62 H5 Z' fill='%231F8A8A'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23F6F4EE'/%3E%3Ccircle cx='90' cy='70' r='30' fill='%23E8742C'/%3E%3Cpath d='M14 126 Q52 100 90 126 T166 126 V172 H14 Z' fill='%231F8A8A'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#F6F4EE;
+    --ink:#23282B;
+    --ink-soft:#5A6166;
+    --line:#DEDACF;
+    --card:#FFFFFF;
+    --teal:#1F8A8A;
+    --tangerine:#E8742C;
+    --naver:#03C75A;
+    --c-meal:#E8742C;
+    --c-cafe:#9A6A4F;
+    --c-sight:#1F8A8A;
+    --c-trans:#5B6B7B;
+    --c-stay:#7E6BC4;
+    --c-shop:#C7567E;
+    --sans:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --display:"Avenir Next","Avenir","Optima","Gill Sans",var(--sans);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;background:var(--paper);}
+  body{
+    font-family:var(--sans);color:var(--ink);line-height:1.6;
+    -webkit-tap-highlight-color:transparent;
+    padding:0 0 calc(48px + env(safe-area-inset-bottom));
+    background:
+      radial-gradient(120% 80% at 82% -8%, rgba(31,138,138,.07), transparent 58%),
+      radial-gradient(100% 70% at -12% 2%, rgba(232,116,44,.06), transparent 54%),
+      var(--paper);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:760px;margin:0 auto;
+    padding-left:calc(16px + env(safe-area-inset-left));
+    padding-right:calc(16px + env(safe-area-inset-right));}
+  header{padding:calc(28px + env(safe-area-inset-top)) 0 12px;text-align:center;}
+  .eyebrow{font-family:var(--display);font-size:12px;letter-spacing:.35em;color:var(--teal);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+  h1{font-size:30px;font-weight:800;letter-spacing:.04em;line-height:1.2;}
+  h1 .dot{color:var(--tangerine);}
+  .dates{font-family:var(--display);margin-top:6px;color:var(--ink-soft);font-size:14px;letter-spacing:.05em;font-weight:600;}
+  .trip-banner{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:13px auto 2px;}
+  .trip-banner .seg{font-size:12px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;}
+  .trip-banner .seg b{color:var(--ink);font-weight:700;}
+  .trip-banner .seg .me{color:var(--tangerine);font-weight:800;}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:14px auto 4px;font-size:12px;color:var(--ink-soft);}
+  .legend span{display:inline-flex;align-items:center;gap:5px;}
+  .swatch{width:10px;height:10px;border-radius:3px;display:inline-block;}
+  .tabs{position:sticky;top:0;z-index:20;
+    background:rgba(246,244,238,.85);
+    -webkit-backdrop-filter:saturate(1.5) blur(12px);backdrop-filter:saturate(1.5) blur(12px);
+    display:flex;gap:6px;overflow-x:auto;
+    padding:calc(12px + env(safe-area-inset-top)) 4px 12px;margin:8px -4px 0;
+    -webkit-overflow-scrolling:touch;border-bottom:1px solid var(--line);}
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 16px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-soft);transition:.18s;white-space:nowrap;font-family:inherit;-webkit-appearance:none;}
+  .tab b{font-family:var(--display);font-weight:800;letter-spacing:.06em;margin-right:5px;}
+  .tab:active{transform:scale(.96);}
+  .tab.today{border-color:var(--tangerine);}
+  .tab .badge{font-family:var(--display);display:inline-block;margin-left:6px;font-size:9px;font-weight:800;color:#fff;background:var(--tangerine);border-radius:999px;padding:1px 6px;letter-spacing:.05em;vertical-align:1px;}
+  .tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .tab.active b{color:var(--tangerine);}
+  .day{display:none;}
+  .day.show{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .day-head{padding:22px 2px 6px;}
+  .day-num{font-family:var(--display);font-size:13px;font-weight:800;letter-spacing:.18em;color:var(--tangerine);}
+  .day-theme{font-size:21px;font-weight:800;margin-top:2px;}
+  .day-sub{font-size:13px;color:var(--ink-soft);margin-top:3px;}
+  .nowpill{font-family:var(--display);display:inline-block;margin-top:9px;font-size:12px;font-weight:700;color:var(--teal);background:#E5F1F0;border-radius:999px;padding:3px 11px;letter-spacing:.03em;}
+  .tl{position:relative;margin:8px 0 0;padding-left:74px;}
+  .tl::before{content:"";position:absolute;left:64px;top:8px;bottom:8px;width:2px;background:var(--line);}
+  .item{position:relative;margin-bottom:14px;}
+  .day.show .item{animation:rise .4s ease both;animation-delay:calc(var(--i,0)*.035s);}
+  @keyframes rise{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:none;}}
+  .time{font-family:var(--display);position:absolute;left:-74px;top:14px;width:52px;text-align:right;font-size:13px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
+  .time.empty{color:var(--ink-soft);font-weight:500;}
+  .item::before{content:"";position:absolute;left:-13px;top:18px;width:11px;height:11px;border-radius:50%;background:var(--card);border:2.5px solid var(--dotc,var(--teal));}
+  .card{background:var(--card);border-radius:12px;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--dotc,var(--teal));box-shadow:0 1px 2px rgba(0,0,0,.03);}
+  .card.alt{background:transparent;border-style:dashed;box-shadow:none;}
+  .item.next .card{box-shadow:0 0 0 2px var(--tangerine),0 4px 14px rgba(232,116,44,.16);}
+  .item.next::before{border-color:var(--tangerine);background:var(--tangerine);}
+  .item.next .time{color:var(--tangerine);}
+  .item.next .title::after{content:" · 接下來";color:var(--tangerine);font-size:11px;font-weight:800;white-space:nowrap;}
+  .card .top{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;}
+  .title{font-size:16px;font-weight:700;flex:1;min-width:0;}
+  .pill{font-family:var(--display);font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;background:var(--dotc,var(--teal));white-space:nowrap;}
+  .alt-tag{font-size:11px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:2px 8px;}
+  .meta{margin-top:7px;font-size:13px;color:var(--ink-soft);line-height:1.55;}
+  .meta div{margin-top:1px;}
+  .meta .k{color:var(--ink);font-weight:600;}
+  .note{margin-top:9px;font-size:13px;line-height:1.6;background:#FBF9F3;border-radius:8px;padding:8px 10px;color:#43484C;}
+  .card.alt .note{background:rgba(0,0,0,.025);}
+  .note .warn{color:#C0392B;font-weight:700;}
+  .price{font-family:var(--display);display:inline-block;margin-top:7px;font-size:12px;font-weight:700;color:var(--tangerine);background:#FDF0E6;border-radius:6px;padding:2px 9px;}
+  .actions{margin-top:10px;}
+  .naver{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;text-decoration:none;color:var(--naver);border:1px solid var(--naver);border-radius:8px;padding:6px 12px;background:#fff;transition:.15s;}
+  .naver:active{background:var(--naver);color:#fff;}
+  .naver .n{font-family:var(--display);font-weight:900;letter-spacing:.02em;}
+  footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:30px;line-height:1.7;}
+  a{color:var(--teal);}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">JEJU ISLAND · 제주도</div>
+    <h1>濟州島五天行程<span class="dot">.</span></h1>
+    <div class="dates">2026 / 6 / 26 — 6 / 30</div>
+    <div class="legend" id="legend"></div>
+  </header>
+  <nav class="tabs" id="tabs"></nav>
+  <main id="days"></main>
+  <footer>
+    時間為預計，現場以營業時間與候位狀況調整<br>
+    點 <b style="color:var(--naver)">NAVER 地圖</b> 以韓文名稱／地址開啟導航 · ⚠ 為需注意的休館資訊<br>
+    星期已校正（6/26 為週五）· 旅途中會自動跳到當天 · 可離線使用
+  </footer>
+</div>
+<script>
+const CAT = {
+  meal:{label:"正餐",c:"var(--c-meal)"},
+  cafe:{label:"咖啡·甜點",c:"var(--c-cafe)"},
+  sight:{label:"景點·自然",c:"var(--c-sight)"},
+  trans:{label:"交通",c:"var(--c-trans)"},
+  stay:{label:"住宿·物流",c:"var(--c-stay)"},
+  shop:{label:"購物",c:"var(--c-shop)"},
+};
+const DAYS = [
+  {n:"DAY 1",date:"6/26（五）",theme:"抵達 · 市區北部",
+   sub:"凌晨班機 → 落地租車，先吃國民美食，傍晚逛東門市場與牧官衙夜間開放",
+   items:[
+    {t:"02:50",title:"班機時間",cat:"trans"},
+    {t:"06:05",title:"落地濟州島",cat:"trans",note:"租車？",naver:"제주국제공항"},
+    {t:"09:00",title:"姐妹麵條 자매국수",cat:"meal",
+      meta:[["地址","제주시 항골남길 46（Naver Map）"],["營業","09:00–18:00（14:30–16:40 休）"],["電話","064-746-2222"]],
+      note:"距機場僅 8 分鐘車程。最多人推薦「豬肉湯麵」與「辣拌麵」",naver:"제주 자매국수 항골남길"},
+    {t:"10:30",title:"紅白馬燈塔 · 梨湖海水浴場",cat:"sight",
+      meta:[["地址","이호테우해변 · 제주시 도리로"],["電話","+82-64-740-6000"]],naver:"이호테우해변"},
+    {t:"11:30",title:"道頭洞彩虹海岸道路",cat:"sight",
+      meta:[["地址","제주시 도두일동 1734"],["電話","+82-64-740-6000"]],naver:"도두동 무지개 해안도로"},
+    {t:"13:00",title:"宇進解酒湯 우진해장국（午餐）",cat:"meal",
+      meta:[["地址","제주시 서사로 11（Naver Map）"],["營業","06:00–22:00"],["電話","064-757-3393"]],
+      note:"排隊久（平均半小時以上），外帶不用等。招牌豬骨蕨菜湯，口感濃稠，有助清理腸胃",naver:"우진해장국"},
+    {t:"",title:"熟成到烤肉 숙성도（總店）",cat:"meal",alt:true,
+      meta:[["地址","제주시 제원길 30 2、3층"],["營業","11:30–22:00（最後點餐 21:10）"],["電話","064-743-8877"]],
+      note:"午餐備案。或晚點直接來吃，肉量比其他烤肉店少、價錢偏高",naver:"숙성도 제주"},
+    {t:"14:30",title:"飯店 check-in 放行李",cat:"stay",note:"找有停車場的飯店"},
+    {t:"15:00",title:"七星街 · 東門市場 · 中央地下街 · 大創",cat:"shop",
+      meta:[["地址","제주동문시장 · 제주시 관덕로14길 20"],["營業","08:00–21:00（5–10 月到 00:00）"],["電話","064-752-3001"]],
+      note:"逛街+點心。伴手禮推中央地下街 9、10 號出口附近（或 12 號）；AKKOMI 店裡提供餅乾試吃",naver:"제주동문시장"},
+    {t:"18:00",title:"濟州牧官衙 · 觀德亭",cat:"sight",
+      meta:[["地址","제주시 관덕로 25"]],
+      note:"夜間開放（5–10 月 18:00 後），每週三～週日 18:00–21:00；週一、週二不開放（6/26 為週五，有開）",naver:"제주목 관아"},
+    {t:"19:00",title:"黑豬肉一條街（晚餐）",cat:"meal",note:"中央地下街晚餐過後陸續閉門",naver:"제주 흑돼지거리"},
+    {t:"20:00",title:"東門市場夜市 · 大創",cat:"shop",note:"夜市 18:00–00:00 限定時段，8 號門",naver:"동문재래시장 야시장"},
+    {t:"21:00",title:"回飯店",cat:"stay",note:"住市區北區"},
+   ]},
+  {n:"DAY 2",date:"6/27（六）",theme:"東部海岸線",
+   sub:"咸德海灘散策 → 貝果博物館 → 海邊咖啡廳，傍晚決定回市區或住東部（週六，咖啡店較滿）",
+   items:[
+    {t:"08:00",title:"Audrant Bakery（早餐）",cat:"cafe",
+      meta:[["營業","07:00–22:00"]],price:"₩7,300",
+      note:"招牌「大蒜奶油麵包」建議 2–3 人分食（會膩）。買完可步行：咸德海灘 → 海水浴場 → 犀牛峰步道 → 回頭開車",naver:"오드랑베이커리"},
+    {t:"",title:"海女飯捲 해녀김밥 본점",cat:"meal",alt:true,
+      meta:[["地址","제주시 조천읍 함덕로 40 3층 302호"],["營業","09:00–15:30"]],
+      note:"早餐備選。海女／鮪魚／紅帶龍蝦／梅子紫菜包飯",naver:"해녀김밥 본점 함덕"},
+    {t:"08:30",title:"咸德海灘散策 · 犀牛峰步道",cat:"sight",
+      note:"咸德犀牛峰在咸德海邊小山丘，走一下就能看整片海",naver:"함덕해수욕장"},
+    {t:"10:00",title:"貝果博物館 London Bagel Museum Jeju",cat:"cafe",
+      meta:[["地址","제주시 구좌읍 동복로 85 제2동 1층"],["營業","08:00–18:00"],["免費停車","구좌읍 동복리 1352"]],price:"₩8,500",
+      note:"<b>週六人多</b>，出發前先用 CatchTable 查線上候位、早點抽號。招牌青蔥奶油貝果，很大顆，可分食",naver:"런던베이글뮤지엄 제주"},
+    {t:"11:00",title:"金寧海水浴場 · 月汀里海水浴場",cat:"sight",naver:"월정리해수욕장"},
+    {t:"12:00",title:"BHC 炸雞",cat:"meal",
+      meta:[["地址","제주시 구좌읍 김녕로 122（金寧國王超市旁）"],["營業","12:00–23:30（無公休）"],["電話","064-784-9245"]],
+      note:"濟州限定火山爆發雞，約 2 人份；推有骨 Macho King",naver:"BHC치킨 김녕"},
+    {t:"14:00",title:"城邑民俗村",cat:"sight",
+      meta:[["營業","10:00–17:00"]],
+      note:"逛 30 分鐘，若來不及就放棄，第四天再看有沒有時間",naver:"성읍민속마을"},
+    {t:"15:00",title:"Cafe The Container 橘子咖啡廳 카페 더 콘테나",cat:"cafe",
+      meta:[["地址","제주시 조천읍 함와로 513"],["營業","10:30–18:00"]],naver:"카페 더 콘테나"},
+    {t:"16:30",title:"Blue Bottle 藍瓶咖啡濟州店 블루보틀 제주",cat:"cafe",
+      meta:[["地址","제주시 구좌읍 번영로 2133-30"],["營業","08:00–18:00"]],
+      note:"有賣 umu 聯名咖啡布丁。大面窗景＋木質調設計，後方松林景色是亮點",naver:"블루보틀 제주"},
+    {t:"18:00",title:"回市區（北區）住宿 or 住東區？",cat:"stay",
+      note:"① 回市區可逛街　② 東部就回飯店休息　③ 住東部隔天可直奔早班船去牛島"},
+   ]},
+  {n:"DAY 3",date:"6/28（日）",theme:"牛島 → 城山日出峰",
+   sub:"城山浦港搭船進牛島環島，傍晚回本島登日出峰、看涉地可支",
+   items:[
+    {t:"",title:"濟州城山浦港 성산포항",cat:"trans",note:"參考 we4-travel.com/udo",naver:"성산포항 종합여객터미널"},
+    {t:"",title:"牛島船班（待查）",cat:"trans",price:"來回 ₩11,000",
+      meta:[["船程","約 15 分鐘"],["末班","5–8 月夏季最後一班 18:00 開船"],["須備","護照正本 · 乘船申報單（去回各一份）· 船票"]],naver:"성산포항 종합여객터미널"},
+    {t:"09:00",title:"牛島循環巴士 or 租腳踏車？",cat:"trans",
+      meta:[["路線","下牛木洞港→下古水洞海水浴場→東岸鯨窟→牛島峰→天津港→西濱白沙"],["巴士","4–9 月 06:50–18:30，成人 ₩5,000"],["電動腳踏車","單人 ₩10,000–25,000、雙人/三輪 ₩25,000–35,000"]],
+      note:"巴士好像只能走半圈；想整圈要騎腳踏車。租賃選有試乘＋附中文地圖的店家",naver:"우도"},
+    {t:"10:00",title:"西濱白沙灘（珊瑚砂沙灘）",cat:"sight",naver:"우도 서빈백사"},
+    {t:"11:00",title:"下古水洞海水浴場",cat:"sight",note:"韓國的「塞班島」",naver:"하고수동해수욕장"},
+    {t:"12:00",title:"MoonGae 海鮮拉麵",cat:"meal",
+      meta:[["地址","우도해안길 802"],["營業","10:30–18:00"],["交通","下古水洞海水浴場站步行約 5 分鐘"]],
+      note:"搭巴士可吃這家；要吃海女鮑魚粥就騎車",naver:"제주 우도해안길 802"},
+    {t:"13:30",title:"UDO SAND（花生冰淇淋）",cat:"cafe",
+      meta:[["地址","우도해안길 788"],["營業","11:00–18:00"],["交通","步行約 6 分鐘"]],price:"₩6,500",
+      note:"有單賣花生餅乾，只有這家買得到，一盒 ₩12,000",naver:"제주 우도해안길 788"},
+    {t:"",title:"HAKOYA 咖啡廳",cat:"cafe",alt:true,
+      meta:[["地址","우도해안길 804 1층 103호"],["營業","08:30–18:30"],["交通","步行約 5 分鐘"]],
+      note:"也是花生冰淇淋",naver:"제주 우도해안길 804"},
+    {t:"14:00",title:"黑沙灘（東岸鯨窟）",cat:"sight",naver:"검멀레해변"},
+    {t:"",title:"牛島炸醬麵",cat:"meal",alt:true,
+      meta:[["地址","우도면 우도해안길 113"],["營業","09:00–18:00"],["交通","黑沙海邊站步行約 2 分鐘"]],naver:"제주 우도해안길 113"},
+    {t:"15:00",title:"牛頭峰（燈塔）",cat:"sight",
+      note:"沿步道與木棧道往上爬約 15–20 分鐘登頂，有點陡但風景非常漂亮。時間不夠就 pass",naver:"우도봉"},
+    {t:"16:30",title:"搭船回本島",cat:"trans",naver:"천진항 우도"},
+    {t:"17:30",title:"城山日出峰",cat:"sight",
+      note:"UNESCO 世界自然遺產。購票登頂來回約 50 分鐘；沿海岸「免費步道」可輕鬆散步",naver:"성산일출봉"},
+    {t:"18:30",title:"涉地可支",cat:"sight",
+      note:"無門票，停車費 ₩3,000。若太晚就隔天早上再來",naver:"섭지코지"},
+    {t:"",title:"晚餐",cat:"meal"},
+   ]},
+  {n:"DAY 4",date:"6/29（一）",theme:"西部海岸線",
+   sub:"偶來市場、Osulloc、挾才海灘，傍晚海景咖啡廳＋高 CP 烤肉收尾",
+   items:[
+    {t:"09:00",title:"涉地可支",cat:"sight",naver:"섭지코지"},
+    {t:"10:00",title:"Orrrn",cat:"cafe",meta:[["營業","10:00–20:00"]],note:"推點心，咖啡普通",naver:"오르른 카페 제주"},
+    {t:"",title:"城邑民俗村",cat:"sight",alt:true,meta:[["營業","10:00–17:00"]],note:"第二天沒逛到的話補在這天",naver:"성읍민속마을"},
+    {t:"12:00",title:"每日偶來市場 서귀포 매일올레시장",cat:"shop",
+      meta:[["地址","서귀포시 서귀동 340（Naver Map）"],["營業","夏季 07:00–21:00、冬季 07:00–20:00"]],
+      note:"有免費停車，晚上比較好逛。老奶奶年糕、橘子冰沙",naver:"서귀포매일올레시장"},
+    {t:"14:00",title:"Osulloc 茶博物館",cat:"sight",meta:[["營業","夏季 09:00–19:00"]],naver:"오설록 티뮤지엄"},
+    {t:"15:30",title:"挾才海水浴場",cat:"sight",naver:"협재해수욕장"},
+    {t:"16:30",title:"Noraba 海鮮拉麵 노라바",cat:"meal",
+      meta:[["地址","제주시 애월읍 구엄길 100（Naver Map）"],["營業","10:00–17:30（14:00–15:00 休、17:00 最後點餐）"]],
+      note:"濟州島西岸網紅店，主打海鮮麵、章魚醬、鐵盒便當。位置就在海岸邊，邊吃邊看海，很有特色的打卡點",naver:"노라바 애월"},
+    {t:"17:30",title:"涯月邑海景咖啡廳 Haejigae Cafe 해지개",cat:"cafe",
+      meta:[["地址","제주시 애월읍 애월북서길 52 1~2층"],["營業","09:00–21:00"],["電話","0507-1358-8586"]],naver:"해지개 카페 애월"},
+    {t:"",title:"烤肉 예약안내",cat:"meal",
+      meta:[["營業","15:00–22:00"]],
+      note:"評價超高、比熱成到高 CP，價格比熟成到優、比市區優，小菜給得很誠意。可考慮跳過海鮮拉麵，先去咖啡廳、然後來吃烤肉，份量少點都吃"},
+   ]},
+  {n:"DAY 5",date:"6/30（二）",theme:"市區 · 返台",
+   sub:"漢拏樹木園、蓮洞商圈採買，晚間班機返台",
+   items:[
+    {t:"",title:"早餐",cat:"meal"},
+    {t:"08:00",title:"漢拏樹木園 · 漢拏樹木園夜市",cat:"sight",
+      meta:[["地址","제주시 수목원길 72（연동）"]],
+      note:"綜藝節目《孝利家民宿》的拍攝地而聞名。野外散步路 09:00–23:00",naver:"한라수목원"},
+    {t:"12:00",title:"蓮洞本家蔘雞湯",cat:"meal",note:"人蔘雞",naver:"본가 삼계탕 연동"},
+    {t:"14:00",title:"樂天超市 · Olive Young · 蓮洞商圈",cat:"shop",
+      note:"<span class='warn'>⚠ 樂天超市 6/27（六）、7/10（五）公休</span>（6/30 週二有開）",naver:"롯데마트 제주점"},
+    {t:"18:00",title:"24 小時土豆排骨湯",cat:"meal",note:"Trip 排名第一",naver:"제주 24시 감자탕"},
+    {t:"19:00",title:"去機場",cat:"trans",naver:"제주국제공항"},
+    {t:"22:40",title:"班機",cat:"trans"},
+    {t:"23:50",title:"落地台灣",cat:"trans"},
+   ]},
+];
+const legend=document.getElementById("legend");
+Object.values(CAT).forEach(c=>{const s=document.createElement("span");s.innerHTML=`<i class="swatch" style="background:${c.c}"></i>${c.label}`;legend.appendChild(s);});
+
+// 判斷今天是第幾天（旅途中自動跳到當天）
+const todayIdx=(function(){
+  try{
+    const now=new Date();
+    const key=(now.getMonth()+1)+"/"+now.getDate()+"（";
+    for(let i=0;i<DAYS.length;i++){if(DAYS[i].date.indexOf(key)===0)return i;}
+  }catch(e){}
+  return -1;
+})();
+const startIdx=todayIdx>=0?todayIdx:0;
+
+const tabs=document.getElementById("tabs"),daysEl=document.getElementById("days");
+DAYS.forEach((d,i)=>{
+  const tab=document.createElement("button");
+  tab.className="tab"+(i===startIdx?" active":"")+(i===todayIdx?" today":"");
+  tab.innerHTML=`<b>${d.n.replace("DAY ","D")}</b>${d.date.split("（")[0]}`+(i===todayIdx?`<span class="badge">今天</span>`:"");
+  tab.onclick=()=>show(i);tabs.appendChild(tab);
+  const day=document.createElement("section");
+  day.className="day"+(i===startIdx?" show":"");
+  let nowpill=(i===todayIdx)?`<div class="nowpill" id="nowpill">現在</div>`:"";
+  let html=`<div class="day-head"><div class="day-num">${d.n} · ${d.date}</div><div class="day-theme">${d.theme}</div><div class="day-sub">${d.sub}</div>${nowpill}</div><div class="tl">`;
+  d.items.forEach((it,idx)=>{
+    const cat=CAT[it.cat];
+    let meta=it.meta?`<div class="meta">`+it.meta.map(m=>`<div><span class="k">${m[0]}</span>：${m[1]}</div>`).join("")+`</div>`:"";
+    const price=it.price?`<div class="price">${it.price}</div>`:"";
+    const note=it.note?`<div class="note">${it.note}</div>`:"";
+    const naver=it.naver?`<div class="actions"><a class="naver" target="_blank" rel="noopener" href="https://map.naver.com/p/search/${encodeURIComponent(it.naver)}"><span class="n">NAVER</span> 地圖 ↗</a></div>`:"";
+    const tag=it.alt?`<span class="alt-tag">備選</span>`:`<span class="pill">${cat.label}</span>`;
+    const mm=(it.t||"").match(/(\d{1,2}):(\d{2})/);
+    const dataMin=mm?` data-min="${parseInt(mm[1],10)*60+parseInt(mm[2],10)}"`:"";
+    html+=`<div class="item" style="--dotc:${cat.c};--i:${idx}"${dataMin}><div class="time${it.t?'':' empty'}">${it.t||'彈性'}</div><div class="card${it.alt?' alt':''}"><div class="top"><div class="title">${it.title}</div>${tag}</div>${meta}${price}${note}${naver}</div></div>`;
+  });
+  html+=`</div>`;day.innerHTML=html;daysEl.appendChild(day);
+});
+function show(i){
+  document.querySelectorAll(".tab").forEach((t,k)=>t.classList.toggle("active",k===i));
+  document.querySelectorAll(".day").forEach((d,k)=>d.classList.toggle("show",k===i));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+// 即時更新「現在」與「接下來」標記（僅當天）
+function refreshNow(){
+  if(todayIdx<0)return;
+  const now=new Date();
+  const cur=now.getHours()*60+now.getMinutes();
+  const np=document.getElementById("nowpill");
+  if(np){const hh=String(now.getHours()).padStart(2,"0"),mm=String(now.getMinutes()).padStart(2,"0");np.textContent="現在 "+hh+":"+mm;}
+  const day=document.querySelectorAll(".day")[todayIdx];
+  if(!day)return;
+  day.querySelectorAll(".item.next").forEach(el=>el.classList.remove("next"));
+  const items=Array.prototype.slice.call(day.querySelectorAll(".item[data-min]"));
+  let next=null;
+  for(let k=0;k<items.length;k++){if(parseInt(items[k].getAttribute("data-min"),10)>=cur){next=items[k];break;}}
+  if(next)next.classList.add("next");
+}
+refreshNow();
+setInterval(refreshNow,30000);
+</script>
+</body>
+</html>
