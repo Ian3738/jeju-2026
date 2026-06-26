@@ -61,6 +61,8 @@
   .nowpill{font-family:var(--display);display:inline-block;font-size:12px;font-weight:700;color:var(--teal);background:#E5F1F0;border-radius:999px;padding:3px 11px;letter-spacing:.03em;}
   .daycal{font-family:var(--sans);display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--c-stay);background:#F1EEFA;border:1px solid #E0D8F3;border-radius:999px;padding:4px 11px;cursor:pointer;}
   .daycal:active{background:var(--c-stay);color:#fff;}
+  .daycal.reset{color:var(--tangerine);background:#FDEFE6;border-color:#F3D8C5;}
+  .daycal.reset:active{background:var(--tangerine);color:#fff;}
   .tl{position:relative;margin:8px 0 0;padding-left:74px;}
   .tl::before{content:"";position:absolute;left:64px;top:8px;bottom:8px;width:2px;background:var(--line);}
   .item{position:relative;margin-bottom:14px;}
@@ -74,13 +76,15 @@
   .item.next::before{border-color:var(--tangerine);background:var(--tangerine);}
   .item.next .time{color:var(--tangerine);}
   .item.next .title::after{content:" · 接下來";color:var(--tangerine);font-size:11px;font-weight:800;white-space:nowrap;}
-  .card .top{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;}
+  .card .top{display:flex;align-items:flex-start;gap:7px;flex-wrap:wrap;}
   .title{font-size:16px;font-weight:700;flex:1;min-width:0;}
   .pill{font-family:var(--display);font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;background:var(--dotc,var(--teal));white-space:nowrap;}
   .alt-tag{font-size:11px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:2px 8px;}
   .cust-tag{font-size:11px;font-weight:800;color:#fff;background:var(--ink);border-radius:999px;padding:2px 8px;letter-spacing:.04em;}
-  .del{border:none;background:transparent;color:var(--ink-soft);font-size:15px;line-height:1;cursor:pointer;padding:2px 2px;}
-  .del:active{color:#C0392B;}
+  .edited-tag{font-size:11px;font-weight:700;color:var(--tangerine);border:1px solid #F3D8C5;background:#FDEFE6;border-radius:999px;padding:2px 8px;}
+  .rowbtns{display:inline-flex;gap:1px;align-items:center;flex:0 0 auto;}
+  .iconbtn{border:none;background:transparent;color:var(--ink-soft);font-size:15px;line-height:1;cursor:pointer;padding:4px 6px;border-radius:7px;font-family:inherit;}
+  .iconbtn:active{background:rgba(0,0,0,.07);color:var(--ink);}
   .meta{margin-top:7px;font-size:13px;color:var(--ink-soft);line-height:1.55;}
   .meta div{margin-top:1px;}
   .meta .k{color:var(--ink);font-weight:600;}
@@ -99,11 +103,9 @@
   .cal:active{background:var(--c-trans);color:#fff;border-color:var(--c-trans);}
   footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:30px;line-height:1.7;}
   a{color:var(--teal);}
-  /* FAB */
   .fab{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:40;display:inline-flex;align-items:center;gap:7px;border:none;border-radius:999px;background:var(--ink);color:#fff;font-family:var(--sans);font-size:15px;font-weight:700;padding:13px 20px;box-shadow:0 6px 20px rgba(0,0,0,.22);cursor:pointer;}
   .fab b{font-size:20px;line-height:1;color:var(--tangerine);}
   .fab:active{transform:scale(.96);}
-  /* modal */
   .modal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-end;justify-content:center;background:rgba(20,22,24,.45);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);}
   .modal.open{display:flex;animation:fade .2s ease;}
   .sheet{width:100%;max-width:760px;background:var(--card);border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));max-height:90vh;overflow:auto;animation:slideup .26s ease;}
@@ -116,6 +118,7 @@
   .field{margin-bottom:12px;}
   .field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px;}
   .field input,.field select,.field textarea{width:100%;font-family:inherit;font-size:16px;color:var(--ink);background:#FBF9F3;border:1px solid var(--line);border-radius:10px;padding:11px 12px;-webkit-appearance:none;appearance:none;}
+  .field input:disabled{opacity:.55;}
   .field textarea{min-height:62px;resize:vertical;}
   .row2{display:flex;gap:10px;}
   .row2 .field{flex:1;}
@@ -148,16 +151,15 @@
   <nav class="tabs" id="tabs"></nav>
   <main id="days"></main>
   <footer>
-    時間為預計，現場以營業時間與候位狀況調整<br>
-    <b style="color:var(--naver)">NAVER</b> / <b style="color:var(--gmap)">Google</b> 地圖按鈕直接開啟手機地圖 App 導航 · <b style="color:var(--c-trans)">＋行事曆</b> 加進手機行事曆<br>
-    <b style="color:var(--ink)">＋新增行程</b> 可搜尋地點自動帶入 · 旅途中自動跳到當天 · 可離線使用
+    每個行程可 <b style="color:var(--ink)">✎ 編輯</b> / <b style="color:var(--ink)">✕ 刪除</b>，預設行程刪了可按 <b style="color:var(--tangerine)">↺ 復原預設</b> 還原<br>
+    <b style="color:var(--naver)">NAVER</b> / <b style="color:var(--gmap)">Google</b> 開地圖 App 導航 · <b style="color:var(--c-trans)">＋行事曆</b> 加進行事曆 · 可離線使用
   </footer>
 </div>
 
 <button class="fab" id="fab" type="button"><b>＋</b> 新增行程</button>
 <div class="modal" id="modal">
   <div class="sheet">
-    <h3>新增行程</h3>
+    <h3 id="modalTitle">新增行程</h3>
     <div class="hint" id="modalHint">加到行程裡</div>
     <span class="sync-state sync-off" id="syncState">本機儲存</span>
     <div class="row2">
@@ -329,17 +331,24 @@ function parseMin(t){const m=(t||'').match(/(\d{1,2}):(\d{2})/);return m?(+m[1])
 function dayKeyOf(i){return DAYS[i].date.split('（')[0];}
 function genId(){return 'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 
-/* ---------- shared store (Firebase if configured, else localStorage) ---------- */
-const LS_KEY='jeju_custom_v1';
-let CUSTOM={};
-function lsLoad(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return{};}}
-function lsSave(o){try{localStorage.setItem(LS_KEY,JSON.stringify(o));}catch(e){}}
+/* ---------- data store: add(list) / edit(base overrides) / hide(base) ---------- */
+const LS_KEY='jeju_data_v2';
+let DATA={add:[],edit:{},hide:{}};
+let EDOC={},HDOC={}; // firebase doc-id maps for base edit/hide
+function lsSave(){try{localStorage.setItem(LS_KEY,JSON.stringify(DATA));}catch(e){}}
+function loadData(){
+  try{const v2=JSON.parse(localStorage.getItem(LS_KEY));if(v2&&v2.add)return{add:v2.add||[],edit:v2.edit||{},hide:v2.hide||{}};}catch(e){}
+  const add=[];
+  try{const v1=JSON.parse(localStorage.getItem('jeju_custom_v1'));if(v1)Object.keys(v1).forEach(dk=>(v1[dk]||[]).forEach(it=>add.push({id:it.id||genId(),day:dk,t:it.t||'',title:it.title||'',cat:it.cat||'sight',note:it.note||'',q:it.q||it.naver||'',name:it.name||it.q||it.naver||'',lat:(it.lat==null?null:it.lat),lng:(it.lng==null?null:it.lng)})));}catch(e){}
+  return {add,edit:{},hide:{}};
+}
 function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
 
 const Store={
   mode:'local', cb:()=>{},
   init(cb){this.cb=cb; if(FIREBASE_CONFIG&&FIREBASE_CONFIG.apiKey){this._fb(cb);}else{this._local(cb);}},
-  _local(cb){this.mode='local';CUSTOM=lsLoad();cb();window.addEventListener('storage',e=>{if(e.key===LS_KEY){CUSTOM=lsLoad();cb();}});},
+  _local(cb){this.mode='local';DATA=loadData();cb();window.addEventListener('storage',e=>{if(e.key===LS_KEY){DATA=loadData();cb();}});},
+  _commit(){lsSave();this.cb();},
   async _fb(cb){
     try{
       await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
@@ -347,22 +356,43 @@ const Store={
       firebase.initializeApp(FIREBASE_CONFIG);
       this.db=firebase.firestore();
       try{await this.db.enablePersistence({synchronizeTabs:true});}catch(e){}
-      this.col=this.db.collection('jejuItems');
+      this.col=this.db.collection('jejuMods');
       this.mode='firebase';
       this.col.onSnapshot(snap=>{
-        CUSTOM={};
-        snap.forEach(d=>{const x=d.data();const dk=x.day;(CUSTOM[dk]=CUSTOM[dk]||[]).push({id:d.id,t:x.t||'',title:x.title||'',cat:x.cat||'sight',note:x.note||'',q:x.q||'',name:x.name||'',lat:(x.lat==null?null:x.lat),lng:(x.lng==null?null:x.lng)});});
+        DATA={add:[],edit:{},hide:{}};EDOC={};HDOC={};
+        snap.forEach(d=>{const x=d.data();
+          if(x.kind==='edit'){DATA.edit[x.baseId]={t:x.t||'',title:x.title||'',cat:x.cat||'sight',note:x.note||'',q:x.q||'',name:x.name||'',lat:(x.lat==null?null:x.lat),lng:(x.lng==null?null:x.lng)};EDOC[x.baseId]=d.id;}
+          else if(x.kind==='hide'){DATA.hide[x.baseId]=1;HDOC[x.baseId]=d.id;}
+          else{DATA.add.push({id:d.id,day:x.day,t:x.t||'',title:x.title||'',cat:x.cat||'sight',note:x.note||'',q:x.q||'',name:x.name||'',lat:(x.lat==null?null:x.lat),lng:(x.lng==null?null:x.lng)});}
+        });
         cb();
       },err=>{console.warn('firestore error',err);});
     }catch(e){console.warn('firebase unavailable, using local',e);this._local(cb);}
   },
-  add(dayKey,item){
-    if(this.mode==='firebase'){this.col.add({day:dayKey,t:item.t,title:item.title,cat:item.cat,note:item.note,q:item.q||'',name:item.name||'',lat:(item.lat==null?null:item.lat),lng:(item.lng==null?null:item.lng),createdAt:firebase.firestore.FieldValue.serverTimestamp()});}
-    else{CUSTOM[dayKey]=CUSTOM[dayKey]||[];CUSTOM[dayKey].push(item);lsSave(CUSTOM);this.cb();}
+  addCustom(item){
+    if(this.mode==='firebase'){this.col.add({kind:'add',day:item.day,t:item.t,title:item.title,cat:item.cat,note:item.note,q:item.q,name:item.name,lat:item.lat,lng:item.lng,createdAt:firebase.firestore.FieldValue.serverTimestamp()});}
+    else{DATA.add.push(item);this._commit();}
   },
-  remove(dayKey,id){
+  editCustom(id,fields){
+    if(this.mode==='firebase'){this.col.doc(id).update(fields);}
+    else{const a=DATA.add.find(x=>x.id===id);if(a)Object.assign(a,fields);this._commit();}
+  },
+  removeCustom(id){
     if(this.mode==='firebase'){this.col.doc(id).delete();}
-    else{CUSTOM[dayKey]=(CUSTOM[dayKey]||[]).filter(x=>x.id!==id);lsSave(CUSTOM);this.cb();}
+    else{DATA.add=DATA.add.filter(x=>x.id!==id);this._commit();}
+  },
+  editBase(baseId,fields){
+    if(this.mode==='firebase'){if(EDOC[baseId])this.col.doc(EDOC[baseId]).update(fields);else this.col.add(Object.assign({kind:'edit',baseId},fields));}
+    else{DATA.edit[baseId]=fields;this._commit();}
+  },
+  hideBase(baseId){
+    if(this.mode==='firebase'){if(!HDOC[baseId])this.col.add({kind:'hide',baseId});}
+    else{DATA.hide[baseId]=1;this._commit();}
+  },
+  resetDay(i){
+    const pre='b'+i+'_';
+    if(this.mode==='firebase'){const b=this.db.batch();Object.keys(EDOC).forEach(k=>{if(k.indexOf(pre)===0)b.delete(this.col.doc(EDOC[k]));});Object.keys(HDOC).forEach(k=>{if(k.indexOf(pre)===0)b.delete(this.col.doc(HDOC[k]));});b.commit();}
+    else{Object.keys(DATA.edit).forEach(k=>{if(k.indexOf(pre)===0)delete DATA.edit[k];});Object.keys(DATA.hide).forEach(k=>{if(k.indexOf(pre)===0)delete DATA.hide[k];});this._commit();}
   }
 };
 
@@ -406,7 +436,7 @@ function vevent(dayIdx,item){
   let desc=icsEsc(item.note||'');
   if(lc.q)desc+=(desc?'\\n':'')+'NAVER 地圖: https://map.naver.com/p/search/'+encodeURIComponent(lc.q);
   const geo=(lc.lat!=null)?'GEO:'+lc.lat+';'+lc.lng:'';
-  return ['BEGIN:VEVENT','UID:'+(item.id||('d'+dayIdx+'-'+start))+'@jeju-2026','DTSTAMP:'+utcStamp(),
+  return ['BEGIN:VEVENT','UID:'+(item._id||('d'+dayIdx+'-'+start))+'@jeju-2026','DTSTAMP:'+utcStamp(),
     'DTSTART;TZID=Asia/Seoul:'+start,'DTEND;TZID=Asia/Seoul:'+end,'SUMMARY:'+icsEsc(item.title),
     loc?'LOCATION:'+icsEsc(loc):'',geo,'DESCRIPTION:'+desc,'END:VEVENT'].filter(Boolean).join('\r\n');
 }
@@ -445,22 +475,32 @@ DAYS.forEach((d,i)=>{
   tab.onclick=()=>show(i);tabsEl.appendChild(tab);
   const sec=document.createElement('section');
   sec.className='day'+(i===current?' show':'');
-  sec.innerHTML=`<div class="day-head"><div class="day-num">${d.n} · ${d.date}</div><div class="day-theme">${d.theme}</div><div class="day-sub">${d.sub}</div><div class="day-tools">${i===todayIdx?`<span class="nowpill" id="nowpill">現在</span>`:''}<button class="daycal" type="button" data-d="${i}">＋ 整天加入行事曆</button></div></div><div class="tl"></div>`;
+  sec.innerHTML=`<div class="day-head"><div class="day-num">${d.n} · ${d.date}</div><div class="day-theme">${d.theme}</div><div class="day-sub">${d.sub}</div><div class="day-tools" id="tools-${i}"></div></div><div class="tl"></div>`;
   daysEl.appendChild(sec);daySections.push(sec);
 });
 
+function hasMods(i){const pre='b'+i+'_';return Object.keys(DATA.edit).some(k=>k.indexOf(pre)===0)||Object.keys(DATA.hide).some(k=>k.indexOf(pre)===0);}
 function mergedItems(i){
-  const base=DAYS[i].items.map((it,idx)=>({...it,_base:true,_o:idx}));
-  let last=-1;
-  base.forEach(it=>{const mn=parseMin(it.t);if(mn!=null)last=mn;it._sort=(mn!=null?mn:last);it._sec=it._o;});
-  const dk=dayKeyOf(i);
-  const cust=(CUSTOM[dk]||[]).map((it,idx)=>{const mn=parseMin(it.t);return{...it,_base:false,_sort:(mn!=null?mn:1e9),_sec:100000+idx};});
-  const all=base.concat(cust);
-  all.sort((a,b)=>a._sort-b._sort||a._sec-b._sec);
-  return all;
+  const dk=dayKeyOf(i),out=[];
+  DAYS[i].items.forEach((bit,idx)=>{
+    const baseId='b'+i+'_'+idx;
+    if(DATA.hide[baseId])return;
+    const it=Object.assign({},bit);
+    if(DATA.edit[baseId]){Object.assign(it,DATA.edit[baseId]);it._edited=true;}
+    it._base=true;it._id=baseId;it._o=idx;out.push(it);
+  });
+  let last=-1;out.forEach(it=>{const mn=parseMin(it.t);if(mn!=null)last=mn;it._sort=(mn!=null?mn:last);it._sec=it._o;});
+  DATA.add.filter(a=>a.day===dk).forEach((a,idx)=>{const mn=parseMin(a.t);out.push(Object.assign({},a,{_base:false,_id:a.id,_cust:true,_sort:(mn!=null?mn:1e9),_sec:100000+idx}));});
+  out.sort((x,y)=>x._sort-y._sort||x._sec-y._sec);
+  return out;
+}
+function renderTools(i){
+  let h=(i===todayIdx?`<span class="nowpill" id="nowpill">現在</span>`:'')+`<button class="daycal" type="button" data-daycal="${i}">＋ 整天加入行事曆</button>`;
+  if(hasMods(i))h+=`<button class="daycal reset" type="button" data-reset="${i}">↺ 復原預設</button>`;
+  $('tools-'+i).innerHTML=h;
 }
 function renderItems(i){
-  const all=mergedItems(i);MERGED[i]=all;const dk=dayKeyOf(i);let html='';
+  const all=mergedItems(i);MERGED[i]=all;let html='';
   all.forEach((it,p)=>{
     const cat=CAT[it.cat]||CAT.sight;
     const meta=it.meta?`<div class="meta">`+it.meta.map(m=>`<div><span class="k">${m[0]}</span>：${m[1]}</div>`).join('')+`</div>`:'';
@@ -472,10 +512,11 @@ function renderItems(i){
     const timed=parseMin(it.t)!=null;
     const cal=timed?`<button class="mapbtn cal" type="button" data-cal="1">＋行事曆</button>`:'';
     const acts=(maps||cal)?`<div class="actions">${maps}${cal}</div>`:'';
-    const del=!it._base?`<button class="del" type="button" data-key="${dk}" data-id="${esc(it.id)}" aria-label="刪除">✕</button>`:'';
-    const tag=it.alt?`<span class="alt-tag">備選</span>`:(!it._base?`<span class="cust-tag">自訂</span>`:`<span class="pill">${cat.label}</span>`);
+    let tag=it.alt?`<span class="alt-tag">備選</span>`:(!it._base?`<span class="cust-tag">自訂</span>`:`<span class="pill">${cat.label}</span>`);
+    if(it._edited)tag+=`<span class="edited-tag">已改</span>`;
+    const ctrls=`<div class="rowbtns"><button class="iconbtn" type="button" data-edit="1" aria-label="編輯">✎</button><button class="iconbtn" type="button" data-del="1" aria-label="刪除">✕</button></div>`;
     const dmin=timed?` data-min="${parseMin(it.t)}"`:'';
-    html+=`<div class="item" style="--dotc:${cat.c}" data-d="${i}" data-p="${p}"${dmin}><div class="time${it.t?'':' empty'}">${it.t||'彈性'}</div><div class="card${it.alt?' alt':''}${!it._base?' cust':''}"><div class="top"><div class="title">${esc(it.title)}</div>${tag}${del}</div>${meta}${price}${note}${acts}</div></div>`;
+    html+=`<div class="item" style="--dotc:${cat.c}" data-d="${i}" data-p="${p}"${dmin}><div class="time${it.t?'':' empty'}">${it.t||'彈性'}</div><div class="card${it.alt?' alt':''}${!it._base?' cust':''}"><div class="top"><div class="title">${esc(it.title)}</div>${tag}${ctrls}</div>${meta}${price}${note}${acts}</div></div>`;
   });
   daySections[i].querySelector('.tl').innerHTML=html;
 }
@@ -492,20 +533,22 @@ function refreshNow(){
   for(let k=0;k<items.length;k++){if(parseInt(items[k].getAttribute('data-min'),10)>=cur){items[k].classList.add('next');break;}}
 }
 
-/* delegated clicks: map / calendar / delete */
+/* delegated clicks */
 daysEl.addEventListener('click',e=>{
+  const resetB=e.target.closest('[data-reset]');if(resetB){if(confirm('復原這一天的預設行程？（你新增的項目不會被刪除）'))Store.resetDay(+resetB.dataset.reset);return;}
+  const dayB=e.target.closest('[data-daycal]');if(dayB){addDayToCalendar(+dayB.dataset.daycal);return;}
   const mapB=e.target.closest('[data-map]');if(mapB){const it=e.target.closest('.item');openMap(mapB.dataset.map,locOf(MERGED[+it.dataset.d][+it.dataset.p]));return;}
   const calB=e.target.closest('[data-cal]');if(calB){const it=e.target.closest('.item');addItemToCalendar(+it.dataset.d,MERGED[+it.dataset.d][+it.dataset.p]);return;}
-  const dayB=e.target.closest('.daycal');if(dayB){addDayToCalendar(+dayB.dataset.d);return;}
-  const delB=e.target.closest('.del');if(delB){if(confirm('刪除這個自訂行程？'))Store.remove(delB.dataset.key,delB.dataset.id);return;}
+  const editB=e.target.closest('[data-edit]');if(editB){const it=e.target.closest('.item');openEdit(MERGED[+it.dataset.d][+it.dataset.p],+it.dataset.d);return;}
+  const delB=e.target.closest('[data-del]');if(delB){const it=e.target.closest('.item');const item=MERGED[+it.dataset.d][+it.dataset.p];if(confirm('刪除「'+item.title+'」？'+(item._base?'\n（之後可按「↺ 復原預設」還原）':''))){if(item._base)Store.hideBase(item._id);else Store.removeCustom(item._id);}return;}
 });
 
-/* ---------- add-item modal + place search ---------- */
+/* ---------- modal: add / edit + place search ---------- */
 const modal=$('modal');
 (function(){const sd=$('f-day');DAYS.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d.n.replace('DAY ','D')+' '+d.date;sd.appendChild(o);});})();
 (function(){const sc=$('f-cat');Object.keys(CAT).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=CAT[k].label;sc.appendChild(o);});})();
 
-let selectedPlace=null,suggTimer=null,suggSeq=0;
+let editing=null,selectedPlace=null,suggTimer=null,suggSeq=0;
 function clearPlace(){selectedPlace=null;const s=$('sugg');if(s){s.classList.remove('show');s.innerHTML='';}const c=$('chipWrap');if(c)c.innerHTML='';}
 function showChip(){const c=$('chipWrap');if(!c)return;if(!selectedPlace){c.innerHTML='';return;}c.innerHTML=`<div class="chip">📍 ${esc(selectedPlace.name)}<span class="x" id="chipX">✕</span></div>`;$('chipX').onclick=()=>{clearPlace();$('f-place').value='';};}
 async function runSearch(q){
@@ -539,24 +582,34 @@ function onPlaceInput(){
 $('f-place').addEventListener('input',onPlaceInput);
 $('f-place').addEventListener('blur',()=>setTimeout(()=>{const s=$('sugg');if(s)s.classList.remove('show');},160));
 
-function updateSync(){const on=Store.mode==='firebase';const s=$('syncState');s.textContent=on?'雲端同步中 · 全團共看':'本機儲存（此手機）';s.className='sync-state '+(on?'sync-on':'sync-off');$('modalHint').textContent=on?'加到共用行程，全團都會看到':'目前只存在這支手機；連結雲端後才會同步給團員';}
-function openModal(){$('f-day').value=current;$('f-time').value='';$('f-title').value='';$('f-cat').value='sight';$('f-note').value='';$('f-place').value='';clearPlace();updateSync();modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>$('f-title').focus(),60);}
+function updateSync(){const on=Store.mode==='firebase';const s=$('syncState');s.textContent=on?'雲端同步中 · 全團共看':'本機儲存（此手機）';s.className='sync-state '+(on?'sync-on':'sync-off');$('modalHint').textContent=on?'修改會同步給全團':'目前只存在這支手機；連結雲端後才會同步給團員';}
+function fillForm(dayIdx,it){
+  $('f-day').value=dayIdx;$('f-time').value=(it&&it.t)||'';$('f-title').value=(it&&it.title)||'';$('f-cat').value=(it&&it.cat)||'sight';$('f-note').value=(it&&it.note)||'';
+  const lc=it?locOf(it):{q:'',name:'',lat:null,lng:null};
+  $('f-place').value=lc.name||lc.q||'';
+  selectedPlace=(lc.lat!=null)?{name:lc.name||lc.q,lat:lc.lat,lng:lc.lng}:null;
+  $('sugg').classList.remove('show');$('sugg').innerHTML='';showChip();
+}
+function openAdd(){editing=null;$('modalTitle').textContent='新增行程';$('saveBtn').textContent='加入行程';$('f-day').disabled=false;fillForm(current,null);updateSync();modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>$('f-title').focus(),60);}
+function openEdit(item,dayIdx){editing={kind:item._base?'base':'custom',id:item._id};$('modalTitle').textContent='編輯行程';$('saveBtn').textContent='儲存修改';$('f-day').disabled=item._base;fillForm(dayIdx,item);updateSync();modal.classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){modal.classList.remove('open');document.body.style.overflow='';}
-$('fab').onclick=openModal;$('cancelBtn').onclick=closeModal;
+$('fab').onclick=openAdd;$('cancelBtn').onclick=closeModal;
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
 $('saveBtn').onclick=()=>{
   const title=$('f-title').value.trim();if(!title){$('f-title').focus();return;}
-  const dayIdx=+$('f-day').value;
-  const typed=$('f-place').value.trim();
-  const item={id:genId(),t:$('f-time').value||'',title,cat:$('f-cat').value,note:$('f-note').value.trim()};
-  if(selectedPlace){item.q=selectedPlace.name;item.name=selectedPlace.name;item.lat=selectedPlace.lat;item.lng=selectedPlace.lng;}
-  else if(typed){item.q=typed;item.name=typed;}
-  Store.add(dayKeyOf(dayIdx),item);
+  const dayIdx=+$('f-day').value;const typed=$('f-place').value.trim();
+  let loc={q:'',name:'',lat:null,lng:null};
+  if(selectedPlace)loc={q:selectedPlace.name,name:selectedPlace.name,lat:selectedPlace.lat,lng:selectedPlace.lng};
+  else if(typed)loc={q:typed,name:typed,lat:null,lng:null};
+  const fields={t:$('f-time').value||'',title,cat:$('f-cat').value,note:$('f-note').value.trim(),q:loc.q,name:loc.name,lat:loc.lat,lng:loc.lng};
+  if(editing&&editing.kind==='base'){Store.editBase(editing.id,fields);}
+  else if(editing&&editing.kind==='custom'){Store.editCustom(editing.id,Object.assign({day:dayKeyOf(dayIdx)},fields));}
+  else{Store.addCustom(Object.assign({id:genId(),day:dayKeyOf(dayIdx)},fields));}
   closeModal();show(dayIdx);
 };
 
 /* ---------- boot ---------- */
-function onData(){DAYS.forEach((_,i)=>renderItems(i));refreshNow();updateSync();}
+function onData(){DAYS.forEach((_,i)=>{renderTools(i);renderItems(i);});refreshNow();updateSync();}
 Store.init(onData);
 setInterval(refreshNow,30000);
 </script>
