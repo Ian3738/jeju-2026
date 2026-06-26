@@ -16,7 +16,7 @@
 <style>
   :root{
     --paper:#F6F4EE; --ink:#23282B; --ink-soft:#5A6166; --line:#DEDACF; --card:#FFFFFF;
-    --teal:#1F8A8A; --tangerine:#E8742C; --naver:#03C75A;
+    --teal:#1F8A8A; --tangerine:#E8742C; --naver:#03C75A; --gmap:#1A73E8;
     --c-meal:#E8742C; --c-cafe:#9A6A4F; --c-sight:#1F8A8A; --c-trans:#5B6B7B; --c-stay:#7E6BC4; --c-shop:#C7567E;
     --sans:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     --display:"Avenir Next","Avenir","Optima","Gill Sans",var(--sans);
@@ -89,10 +89,13 @@
   .note .warn{color:#C0392B;font-weight:700;}
   .price{font-family:var(--display);display:inline-block;margin-top:7px;font-size:12px;font-weight:700;color:var(--tangerine);background:#FDF0E6;border-radius:6px;padding:2px 9px;}
   .actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;}
-  .naver{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;text-decoration:none;color:var(--naver);border:1px solid var(--naver);border-radius:8px;padding:6px 12px;background:#fff;transition:.15s;}
+  .mapbtn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;border-radius:8px;padding:6px 12px;background:#fff;cursor:pointer;font-family:inherit;-webkit-appearance:none;}
+  .naver{color:var(--naver);border:1px solid var(--naver);}
   .naver:active{background:var(--naver);color:#fff;}
   .naver .n{font-family:var(--display);font-weight:900;letter-spacing:.02em;}
-  .cal{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--c-trans);border:1px solid var(--line);border-radius:8px;padding:6px 12px;background:#fff;cursor:pointer;font-family:inherit;}
+  .gmap{color:var(--gmap);border:1px solid var(--gmap);}
+  .gmap:active{background:var(--gmap);color:#fff;}
+  .cal{color:var(--c-trans);border:1px solid var(--line);}
   .cal:active{background:var(--c-trans);color:#fff;border-color:var(--c-trans);}
   footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:30px;line-height:1.7;}
   a{color:var(--teal);}
@@ -116,6 +119,17 @@
   .field textarea{min-height:62px;resize:vertical;}
   .row2{display:flex;gap:10px;}
   .row2 .field{flex:1;}
+  .place-wrap{position:relative;}
+  .sugg{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:5;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.16);max-height:240px;overflow:auto;display:none;}
+  .sugg.show{display:block;}
+  .sugg-item{padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer;}
+  .sugg-item:last-child{border-bottom:none;}
+  .sugg-item:active{background:#FBF9F3;}
+  .sugg-item .nm{font-weight:700;color:var(--ink);font-size:14px;}
+  .sugg-item .ad{font-size:12px;color:var(--ink-soft);margin-top:1px;}
+  .sugg-loading{padding:10px 12px;font-size:13px;color:var(--ink-soft);}
+  .chip{display:inline-flex;align-items:center;gap:8px;margin-top:8px;background:#E5F1F0;border:1px solid #BFE0DE;color:#15706E;border-radius:10px;padding:8px 11px;font-size:13px;font-weight:700;}
+  .chip .x{cursor:pointer;font-weight:800;}
   .sheet-actions{display:flex;gap:10px;margin-top:4px;}
   .btn{flex:1;border:none;border-radius:11px;padding:14px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;}
   .btn-primary{background:var(--ink);color:#fff;}
@@ -135,8 +149,8 @@
   <main id="days"></main>
   <footer>
     時間為預計，現場以營業時間與候位狀況調整<br>
-    點 <b style="color:var(--naver)">NAVER 地圖</b> 導航 · <b style="color:var(--c-trans)">＋行事曆</b> 加進手機行事曆 · <b style="color:var(--ink)">＋新增行程</b> 加入自己的點<br>
-    星期已校正（6/26 為週五）· 旅途中自動跳到當天 · 可離線使用
+    <b style="color:var(--naver)">NAVER</b> / <b style="color:var(--gmap)">Google</b> 地圖按鈕直接開啟手機地圖 App 導航 · <b style="color:var(--c-trans)">＋行事曆</b> 加進手機行事曆<br>
+    <b style="color:var(--ink)">＋新增行程</b> 可搜尋地點自動帶入 · 旅途中自動跳到當天 · 可離線使用
   </footer>
 </div>
 
@@ -151,9 +165,14 @@
       <div class="field"><label>時間（可留空）</label><input type="time" id="f-time"></div>
     </div>
     <div class="field"><label>標題 ＊</label><input type="text" id="f-title" placeholder="例如：黑豬肉晚餐" maxlength="60"></div>
+    <div class="field place-wrap">
+      <label>地點 · 搜尋地圖（可留空）</label>
+      <input type="text" id="f-place" placeholder="打店名/景點，例：스타벅스 제주 / 漢拏山" maxlength="80" autocomplete="off">
+      <div class="sugg" id="sugg"></div>
+      <div id="chipWrap"></div>
+    </div>
     <div class="field"><label>分類</label><select id="f-cat"></select></div>
     <div class="field"><label>備註（可留空）</label><textarea id="f-note" placeholder="訂位、價錢、提醒…" maxlength="300"></textarea></div>
-    <div class="field"><label>NAVER 地圖關鍵字／韓文地址（可留空）</label><input type="text" id="f-naver" placeholder="例如：제주 흑돼지거리" maxlength="80"></div>
     <div class="sheet-actions">
       <button class="btn btn-ghost" id="cancelBtn" type="button">取消</button>
       <button class="btn btn-primary" id="saveBtn" type="button">加入行程</button>
@@ -332,13 +351,13 @@ const Store={
       this.mode='firebase';
       this.col.onSnapshot(snap=>{
         CUSTOM={};
-        snap.forEach(d=>{const x=d.data();const dk=x.day;(CUSTOM[dk]=CUSTOM[dk]||[]).push({id:d.id,t:x.t||'',title:x.title||'',cat:x.cat||'sight',note:x.note||'',naver:x.naver||''});});
+        snap.forEach(d=>{const x=d.data();const dk=x.day;(CUSTOM[dk]=CUSTOM[dk]||[]).push({id:d.id,t:x.t||'',title:x.title||'',cat:x.cat||'sight',note:x.note||'',q:x.q||'',name:x.name||'',lat:(x.lat==null?null:x.lat),lng:(x.lng==null?null:x.lng)});});
         cb();
       },err=>{console.warn('firestore error',err);});
     }catch(e){console.warn('firebase unavailable, using local',e);this._local(cb);}
   },
   add(dayKey,item){
-    if(this.mode==='firebase'){this.col.add({day:dayKey,t:item.t,title:item.title,cat:item.cat,note:item.note,naver:item.naver,createdAt:firebase.firestore.FieldValue.serverTimestamp()});}
+    if(this.mode==='firebase'){this.col.add({day:dayKey,t:item.t,title:item.title,cat:item.cat,note:item.note,q:item.q||'',name:item.name||'',lat:(item.lat==null?null:item.lat),lng:(item.lng==null?null:item.lng),createdAt:firebase.firestore.FieldValue.serverTimestamp()});}
     else{CUSTOM[dayKey]=CUSTOM[dayKey]||[];CUSTOM[dayKey].push(item);lsSave(CUSTOM);this.cb();}
   },
   remove(dayKey,id){
@@ -346,6 +365,30 @@ const Store={
     else{CUSTOM[dayKey]=(CUSTOM[dayKey]||[]).filter(x=>x.id!==id);lsSave(CUSTOM);this.cb();}
   }
 };
+
+/* ---------- maps: location + open native app ---------- */
+function locOf(it){
+  const lat=(it.lat!=null&&it.lat!=='')?it.lat:null;
+  const lng=(it.lng!=null&&it.lng!=='')?it.lng:null;
+  const q=it.q||it.naver||it.name||'';
+  return {q, name:it.name||it.q||it.naver||'', lat, lng};
+}
+function mapUrls(loc){
+  const host=location.hostname||'jeju';
+  const google=(loc.lat!=null)?`https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.q)}`;
+  const naverApp=(loc.lat!=null)?`nmap://place?lat=${loc.lat}&lng=${loc.lng}&name=${encodeURIComponent(loc.name||loc.q)}&appname=${host}`:`nmap://search?query=${encodeURIComponent(loc.q)}&appname=${host}`;
+  const naverWeb=loc.q?`https://map.naver.com/p/search/${encodeURIComponent(loc.q)}`:'https://map.naver.com/';
+  return {google,naverApp,naverWeb};
+}
+function openGoogle(loc){window.open(mapUrls(loc).google,'_blank','noopener');}
+function openNaver(loc){
+  const u=mapUrls(loc);let opened=false;
+  const cancel=()=>{opened=true;document.removeEventListener('visibilitychange',cancel);};
+  document.addEventListener('visibilitychange',cancel);
+  setTimeout(()=>{document.removeEventListener('visibilitychange',cancel);if(!opened&&!document.hidden)window.open(u.naverWeb,'_blank','noopener');},1300);
+  window.location.href=u.naverApp;
+}
+function openMap(provider,loc){if(!loc.q&&loc.lat==null)return;if(provider==='google')openGoogle(loc);else openNaver(loc);}
 
 /* ---------- calendar (.ics) ---------- */
 function icsEsc(s){return String(s==null?'':s).replace(/<[^>]+>/g,'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}
@@ -356,14 +399,16 @@ function vevent(dayIdx,item){
   const start=`2026${pad2(mo)}${pad2(da)}T${pad2(h)}${pad2(mi)}00`;
   let tot=h*60+mi+60; if(tot>1439)tot=1439;
   const end=`2026${pad2(mo)}${pad2(da)}T${pad2(Math.floor(tot/60))}${pad2(tot%60)}00`;
+  const lc=locOf(item);
   let loc='';
   if(item.meta){const f=item.meta.find(x=>x[0].indexOf('地址')>=0);if(f)loc=f[1];}
-  if(!loc&&item.naver)loc=item.naver;
+  if(!loc)loc=lc.name||lc.q||'';
   let desc=icsEsc(item.note||'');
-  if(item.naver)desc+=(desc?'\\n':'')+'NAVER 地圖: https://map.naver.com/p/search/'+encodeURIComponent(item.naver);
+  if(lc.q)desc+=(desc?'\\n':'')+'NAVER 地圖: https://map.naver.com/p/search/'+encodeURIComponent(lc.q);
+  const geo=(lc.lat!=null)?'GEO:'+lc.lat+';'+lc.lng:'';
   return ['BEGIN:VEVENT','UID:'+(item.id||('d'+dayIdx+'-'+start))+'@jeju-2026','DTSTAMP:'+utcStamp(),
     'DTSTART;TZID=Asia/Seoul:'+start,'DTEND;TZID=Asia/Seoul:'+end,'SUMMARY:'+icsEsc(item.title),
-    loc?'LOCATION:'+icsEsc(loc):'','DESCRIPTION:'+desc,'END:VEVENT'].filter(Boolean).join('\r\n');
+    loc?'LOCATION:'+icsEsc(loc):'',geo,'DESCRIPTION:'+desc,'END:VEVENT'].filter(Boolean).join('\r\n');
 }
 function buildICS(events){
   return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jeju 2026//Itinerary//ZH-Hant','CALSCALE:GREGORIAN','METHOD:PUBLISH',
@@ -422,10 +467,11 @@ function renderItems(i){
     const price=it.price?`<div class="price">${it.price}</div>`:'';
     let noteHtml='';if(it.note)noteHtml=it._base?it.note:esc(it.note).replace(/\n/g,'<br>');
     const note=noteHtml?`<div class="note">${noteHtml}</div>`:'';
-    const naver=it.naver?`<a class="naver" target="_blank" rel="noopener" href="https://map.naver.com/p/search/${encodeURIComponent(it.naver)}"><span class="n">NAVER</span> 地圖 ↗</a>`:'';
+    const lc=locOf(it);
+    const maps=lc.q?`<button class="mapbtn naver" type="button" data-map="naver"><span class="n">NAVER</span> 地圖 ↗</button><button class="mapbtn gmap" type="button" data-map="google">Google ↗</button>`:'';
     const timed=parseMin(it.t)!=null;
-    const cal=timed?`<button class="cal" type="button">＋行事曆</button>`:'';
-    const acts=(naver||cal)?`<div class="actions">${naver}${cal}</div>`:'';
+    const cal=timed?`<button class="mapbtn cal" type="button" data-cal="1">＋行事曆</button>`:'';
+    const acts=(maps||cal)?`<div class="actions">${maps}${cal}</div>`:'';
     const del=!it._base?`<button class="del" type="button" data-key="${dk}" data-id="${esc(it.id)}" aria-label="刪除">✕</button>`:'';
     const tag=it.alt?`<span class="alt-tag">備選</span>`:(!it._base?`<span class="cust-tag">自訂</span>`:`<span class="pill">${cat.label}</span>`);
     const dmin=timed?` data-min="${parseMin(it.t)}"`:'';
@@ -446,26 +492,65 @@ function refreshNow(){
   for(let k=0;k<items.length;k++){if(parseInt(items[k].getAttribute('data-min'),10)>=cur){items[k].classList.add('next');break;}}
 }
 
-/* delegated clicks for calendar / delete */
+/* delegated clicks: map / calendar / delete */
 daysEl.addEventListener('click',e=>{
-  const calB=e.target.closest('.cal');if(calB){const it=e.target.closest('.item');addItemToCalendar(+it.dataset.d,MERGED[+it.dataset.d][+it.dataset.p]);return;}
+  const mapB=e.target.closest('[data-map]');if(mapB){const it=e.target.closest('.item');openMap(mapB.dataset.map,locOf(MERGED[+it.dataset.d][+it.dataset.p]));return;}
+  const calB=e.target.closest('[data-cal]');if(calB){const it=e.target.closest('.item');addItemToCalendar(+it.dataset.d,MERGED[+it.dataset.d][+it.dataset.p]);return;}
   const dayB=e.target.closest('.daycal');if(dayB){addDayToCalendar(+dayB.dataset.d);return;}
   const delB=e.target.closest('.del');if(delB){if(confirm('刪除這個自訂行程？'))Store.remove(delB.dataset.key,delB.dataset.id);return;}
 });
 
-/* ---------- add-item modal ---------- */
+/* ---------- add-item modal + place search ---------- */
 const modal=$('modal');
 (function(){const sd=$('f-day');DAYS.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d.n.replace('DAY ','D')+' '+d.date;sd.appendChild(o);});})();
 (function(){const sc=$('f-cat');Object.keys(CAT).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=CAT[k].label;sc.appendChild(o);});})();
+
+let selectedPlace=null,suggTimer=null,suggSeq=0;
+function clearPlace(){selectedPlace=null;const s=$('sugg');if(s){s.classList.remove('show');s.innerHTML='';}const c=$('chipWrap');if(c)c.innerHTML='';}
+function showChip(){const c=$('chipWrap');if(!c)return;if(!selectedPlace){c.innerHTML='';return;}c.innerHTML=`<div class="chip">📍 ${esc(selectedPlace.name)}<span class="x" id="chipX">✕</span></div>`;$('chipX').onclick=()=>{clearPlace();$('f-place').value='';};}
+async function runSearch(q){
+  const seq=++suggSeq;const box=$('sugg');
+  box.classList.add('show');box.innerHTML='<div class="sugg-loading">搜尋中…</div>';
+  try{
+    const r=await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=6&lang=default&lat=33.38&lon=126.55`);
+    const j=await r.json();if(seq!==suggSeq)return;
+    const feats=(j&&j.features)||[];
+    if(!feats.length){box.innerHTML='<div class="sugg-loading">找不到 — 存檔後會以文字搜尋地圖</div>';return;}
+    box.innerHTML='';
+    feats.forEach(f=>{
+      const p=f.properties||{},g=(f.geometry&&f.geometry.coordinates)||[];
+      const nm=p.name||p.street||q;
+      const ad=[p.street&&(p.street+(p.housenumber?' '+p.housenumber:'')),p.district,p.city||p.county,p.state,p.country].filter(Boolean).join(', ');
+      const lng=g[0],lat=g[1];
+      const el=document.createElement('div');el.className='sugg-item';
+      el.innerHTML=`<div class="nm">${esc(nm)}</div>${ad?`<div class="ad">${esc(ad)}</div>`:''}`;
+      el.onclick=()=>{selectedPlace={name:nm,lat:lat,lng:lng};$('f-place').value=nm;box.classList.remove('show');box.innerHTML='';showChip();};
+      box.appendChild(el);
+    });
+  }catch(e){if(seq!==suggSeq)return;box.innerHTML='<div class="sugg-loading">搜尋服務暫時無法連線 — 存檔後會以文字搜尋</div>';}
+}
+function onPlaceInput(){
+  selectedPlace=null;showChip();
+  const q=$('f-place').value.trim();
+  clearTimeout(suggTimer);
+  if(q.length<2){$('sugg').classList.remove('show');return;}
+  suggTimer=setTimeout(()=>runSearch(q),320);
+}
+$('f-place').addEventListener('input',onPlaceInput);
+$('f-place').addEventListener('blur',()=>setTimeout(()=>{const s=$('sugg');if(s)s.classList.remove('show');},160));
+
 function updateSync(){const on=Store.mode==='firebase';const s=$('syncState');s.textContent=on?'雲端同步中 · 全團共看':'本機儲存（此手機）';s.className='sync-state '+(on?'sync-on':'sync-off');$('modalHint').textContent=on?'加到共用行程，全團都會看到':'目前只存在這支手機；連結雲端後才會同步給團員';}
-function openModal(){$('f-day').value=current;$('f-time').value='';$('f-title').value='';$('f-cat').value='sight';$('f-note').value='';$('f-naver').value='';updateSync();modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>$('f-title').focus(),60);}
+function openModal(){$('f-day').value=current;$('f-time').value='';$('f-title').value='';$('f-cat').value='sight';$('f-note').value='';$('f-place').value='';clearPlace();updateSync();modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>$('f-title').focus(),60);}
 function closeModal(){modal.classList.remove('open');document.body.style.overflow='';}
 $('fab').onclick=openModal;$('cancelBtn').onclick=closeModal;
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
 $('saveBtn').onclick=()=>{
   const title=$('f-title').value.trim();if(!title){$('f-title').focus();return;}
   const dayIdx=+$('f-day').value;
-  const item={id:genId(),t:$('f-time').value||'',title,cat:$('f-cat').value,note:$('f-note').value.trim(),naver:$('f-naver').value.trim()};
+  const typed=$('f-place').value.trim();
+  const item={id:genId(),t:$('f-time').value||'',title,cat:$('f-cat').value,note:$('f-note').value.trim()};
+  if(selectedPlace){item.q=selectedPlace.name;item.name=selectedPlace.name;item.lat=selectedPlace.lat;item.lng=selectedPlace.lng;}
+  else if(typed){item.q=typed;item.name=typed;}
   Store.add(dayKeyOf(dayIdx),item);
   closeModal();show(dayIdx);
 };
