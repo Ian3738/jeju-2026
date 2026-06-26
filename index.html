@@ -15,56 +15,33 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23F6F4EE'/%3E%3Ccircle cx='90' cy='70' r='30' fill='%23E8742C'/%3E%3Cpath d='M14 126 Q52 100 90 126 T166 126 V172 H14 Z' fill='%231F8A8A'/%3E%3C/svg%3E">
 <style>
   :root{
-    --paper:#F6F4EE;
-    --ink:#23282B;
-    --ink-soft:#5A6166;
-    --line:#DEDACF;
-    --card:#FFFFFF;
-    --teal:#1F8A8A;
-    --tangerine:#E8742C;
-    --naver:#03C75A;
-    --c-meal:#E8742C;
-    --c-cafe:#9A6A4F;
-    --c-sight:#1F8A8A;
-    --c-trans:#5B6B7B;
-    --c-stay:#7E6BC4;
-    --c-shop:#C7567E;
+    --paper:#F6F4EE; --ink:#23282B; --ink-soft:#5A6166; --line:#DEDACF; --card:#FFFFFF;
+    --teal:#1F8A8A; --tangerine:#E8742C; --naver:#03C75A;
+    --c-meal:#E8742C; --c-cafe:#9A6A4F; --c-sight:#1F8A8A; --c-trans:#5B6B7B; --c-stay:#7E6BC4; --c-shop:#C7567E;
     --sans:"PingFang TC","Noto Sans TC","Microsoft JhengHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     --display:"Avenir Next","Avenir","Optima","Gill Sans",var(--sans);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{-webkit-text-size-adjust:100%;background:var(--paper);}
   body{
-    font-family:var(--sans);color:var(--ink);line-height:1.6;
-    -webkit-tap-highlight-color:transparent;
-    padding:0 0 calc(48px + env(safe-area-inset-bottom));
+    font-family:var(--sans);color:var(--ink);line-height:1.6;-webkit-tap-highlight-color:transparent;
+    padding:0 0 calc(96px + env(safe-area-inset-bottom));
     background:
       radial-gradient(120% 80% at 82% -8%, rgba(31,138,138,.07), transparent 58%),
       radial-gradient(100% 70% at -12% 2%, rgba(232,116,44,.06), transparent 54%),
       var(--paper);
     background-attachment:fixed;
   }
-  .wrap{max-width:760px;margin:0 auto;
-    padding-left:calc(16px + env(safe-area-inset-left));
-    padding-right:calc(16px + env(safe-area-inset-right));}
+  .wrap{max-width:760px;margin:0 auto;padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right));}
   header{padding:calc(28px + env(safe-area-inset-top)) 0 12px;text-align:center;}
   .eyebrow{font-family:var(--display);font-size:12px;letter-spacing:.35em;color:var(--teal);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
   h1{font-size:30px;font-weight:800;letter-spacing:.04em;line-height:1.2;}
   h1 .dot{color:var(--tangerine);}
   .dates{font-family:var(--display);margin-top:6px;color:var(--ink-soft);font-size:14px;letter-spacing:.05em;font-weight:600;}
-  .trip-banner{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:13px auto 2px;}
-  .trip-banner .seg{font-size:12px;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 11px;}
-  .trip-banner .seg b{color:var(--ink);font-weight:700;}
-  .trip-banner .seg .me{color:var(--tangerine);font-weight:800;}
   .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin:14px auto 4px;font-size:12px;color:var(--ink-soft);}
   .legend span{display:inline-flex;align-items:center;gap:5px;}
   .swatch{width:10px;height:10px;border-radius:3px;display:inline-block;}
-  .tabs{position:sticky;top:0;z-index:20;
-    background:rgba(246,244,238,.85);
-    -webkit-backdrop-filter:saturate(1.5) blur(12px);backdrop-filter:saturate(1.5) blur(12px);
-    display:flex;gap:6px;overflow-x:auto;
-    padding:calc(12px + env(safe-area-inset-top)) 4px 12px;margin:8px -4px 0;
-    -webkit-overflow-scrolling:touch;border-bottom:1px solid var(--line);}
+  .tabs{position:sticky;top:0;z-index:20;background:rgba(246,244,238,.85);-webkit-backdrop-filter:saturate(1.5) blur(12px);backdrop-filter:saturate(1.5) blur(12px);display:flex;gap:6px;overflow-x:auto;padding:calc(12px + env(safe-area-inset-top)) 4px 12px;margin:8px -4px 0;-webkit-overflow-scrolling:touch;border-bottom:1px solid var(--line);}
   .tabs::-webkit-scrollbar{display:none;}
   .tab{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 16px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-soft);transition:.18s;white-space:nowrap;font-family:inherit;-webkit-appearance:none;}
   .tab b{font-family:var(--display);font-weight:800;letter-spacing:.06em;margin-right:5px;}
@@ -80,17 +57,19 @@
   .day-num{font-family:var(--display);font-size:13px;font-weight:800;letter-spacing:.18em;color:var(--tangerine);}
   .day-theme{font-size:21px;font-weight:800;margin-top:2px;}
   .day-sub{font-size:13px;color:var(--ink-soft);margin-top:3px;}
-  .nowpill{font-family:var(--display);display:inline-block;margin-top:9px;font-size:12px;font-weight:700;color:var(--teal);background:#E5F1F0;border-radius:999px;padding:3px 11px;letter-spacing:.03em;}
+  .day-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;}
+  .nowpill{font-family:var(--display);display:inline-block;font-size:12px;font-weight:700;color:var(--teal);background:#E5F1F0;border-radius:999px;padding:3px 11px;letter-spacing:.03em;}
+  .daycal{font-family:var(--sans);display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--c-stay);background:#F1EEFA;border:1px solid #E0D8F3;border-radius:999px;padding:4px 11px;cursor:pointer;}
+  .daycal:active{background:var(--c-stay);color:#fff;}
   .tl{position:relative;margin:8px 0 0;padding-left:74px;}
   .tl::before{content:"";position:absolute;left:64px;top:8px;bottom:8px;width:2px;background:var(--line);}
   .item{position:relative;margin-bottom:14px;}
-  .day.show .item{animation:rise .4s ease both;animation-delay:calc(var(--i,0)*.035s);}
-  @keyframes rise{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:none;}}
   .time{font-family:var(--display);position:absolute;left:-74px;top:14px;width:52px;text-align:right;font-size:13px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
   .time.empty{color:var(--ink-soft);font-weight:500;}
   .item::before{content:"";position:absolute;left:-13px;top:18px;width:11px;height:11px;border-radius:50%;background:var(--card);border:2.5px solid var(--dotc,var(--teal));}
   .card{background:var(--card);border-radius:12px;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--dotc,var(--teal));box-shadow:0 1px 2px rgba(0,0,0,.03);}
   .card.alt{background:transparent;border-style:dashed;box-shadow:none;}
+  .card.cust{border-left-style:solid;background:linear-gradient(0deg,rgba(0,0,0,.012),rgba(0,0,0,.012)),var(--card);}
   .item.next .card{box-shadow:0 0 0 2px var(--tangerine),0 4px 14px rgba(232,116,44,.16);}
   .item.next::before{border-color:var(--tangerine);background:var(--tangerine);}
   .item.next .time{color:var(--tangerine);}
@@ -99,6 +78,9 @@
   .title{font-size:16px;font-weight:700;flex:1;min-width:0;}
   .pill{font-family:var(--display);font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;background:var(--dotc,var(--teal));white-space:nowrap;}
   .alt-tag{font-size:11px;font-weight:700;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:2px 8px;}
+  .cust-tag{font-size:11px;font-weight:800;color:#fff;background:var(--ink);border-radius:999px;padding:2px 8px;letter-spacing:.04em;}
+  .del{border:none;background:transparent;color:var(--ink-soft);font-size:15px;line-height:1;cursor:pointer;padding:2px 2px;}
+  .del:active{color:#C0392B;}
   .meta{margin-top:7px;font-size:13px;color:var(--ink-soft);line-height:1.55;}
   .meta div{margin-top:1px;}
   .meta .k{color:var(--ink);font-weight:600;}
@@ -106,12 +88,38 @@
   .card.alt .note{background:rgba(0,0,0,.025);}
   .note .warn{color:#C0392B;font-weight:700;}
   .price{font-family:var(--display);display:inline-block;margin-top:7px;font-size:12px;font-weight:700;color:var(--tangerine);background:#FDF0E6;border-radius:6px;padding:2px 9px;}
-  .actions{margin-top:10px;}
+  .actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px;}
   .naver{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;text-decoration:none;color:var(--naver);border:1px solid var(--naver);border-radius:8px;padding:6px 12px;background:#fff;transition:.15s;}
   .naver:active{background:var(--naver);color:#fff;}
   .naver .n{font-family:var(--display);font-weight:900;letter-spacing:.02em;}
+  .cal{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--c-trans);border:1px solid var(--line);border-radius:8px;padding:6px 12px;background:#fff;cursor:pointer;font-family:inherit;}
+  .cal:active{background:var(--c-trans);color:#fff;border-color:var(--c-trans);}
   footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:30px;line-height:1.7;}
   a{color:var(--teal);}
+  /* FAB */
+  .fab{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:40;display:inline-flex;align-items:center;gap:7px;border:none;border-radius:999px;background:var(--ink);color:#fff;font-family:var(--sans);font-size:15px;font-weight:700;padding:13px 20px;box-shadow:0 6px 20px rgba(0,0,0,.22);cursor:pointer;}
+  .fab b{font-size:20px;line-height:1;color:var(--tangerine);}
+  .fab:active{transform:scale(.96);}
+  /* modal */
+  .modal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-end;justify-content:center;background:rgba(20,22,24,.45);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);}
+  .modal.open{display:flex;animation:fade .2s ease;}
+  .sheet{width:100%;max-width:760px;background:var(--card);border-radius:18px 18px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));max-height:90vh;overflow:auto;animation:slideup .26s ease;}
+  @keyframes slideup{from{transform:translateY(48px);}to{transform:none;}}
+  .sheet h3{font-size:19px;font-weight:800;}
+  .sheet .hint{font-size:12px;color:var(--ink-soft);margin:3px 0 12px;}
+  .sync-state{font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;display:inline-block;margin-bottom:14px;}
+  .sync-on{background:#E5F4EC;color:#1B7F4B;}
+  .sync-off{background:#FBF0E6;color:#A85A1E;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px;}
+  .field input,.field select,.field textarea{width:100%;font-family:inherit;font-size:16px;color:var(--ink);background:#FBF9F3;border:1px solid var(--line);border-radius:10px;padding:11px 12px;-webkit-appearance:none;appearance:none;}
+  .field textarea{min-height:62px;resize:vertical;}
+  .row2{display:flex;gap:10px;}
+  .row2 .field{flex:1;}
+  .sheet-actions{display:flex;gap:10px;margin-top:4px;}
+  .btn{flex:1;border:none;border-radius:11px;padding:14px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;}
+  .btn-primary{background:var(--ink);color:#fff;}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink-soft);}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 </style>
 </head>
@@ -127,11 +135,37 @@
   <main id="days"></main>
   <footer>
     時間為預計，現場以營業時間與候位狀況調整<br>
-    點 <b style="color:var(--naver)">NAVER 地圖</b> 以韓文名稱／地址開啟導航 · ⚠ 為需注意的休館資訊<br>
-    星期已校正（6/26 為週五）· 旅途中會自動跳到當天 · 可離線使用
+    點 <b style="color:var(--naver)">NAVER 地圖</b> 導航 · <b style="color:var(--c-trans)">＋行事曆</b> 加進手機行事曆 · <b style="color:var(--ink)">＋新增行程</b> 加入自己的點<br>
+    星期已校正（6/26 為週五）· 旅途中自動跳到當天 · 可離線使用
   </footer>
 </div>
+
+<button class="fab" id="fab" type="button"><b>＋</b> 新增行程</button>
+<div class="modal" id="modal">
+  <div class="sheet">
+    <h3>新增行程</h3>
+    <div class="hint" id="modalHint">加到行程裡</div>
+    <span class="sync-state sync-off" id="syncState">本機儲存</span>
+    <div class="row2">
+      <div class="field"><label>哪一天</label><select id="f-day"></select></div>
+      <div class="field"><label>時間（可留空）</label><input type="time" id="f-time"></div>
+    </div>
+    <div class="field"><label>標題 ＊</label><input type="text" id="f-title" placeholder="例如：黑豬肉晚餐" maxlength="60"></div>
+    <div class="field"><label>分類</label><select id="f-cat"></select></div>
+    <div class="field"><label>備註（可留空）</label><textarea id="f-note" placeholder="訂位、價錢、提醒…" maxlength="300"></textarea></div>
+    <div class="field"><label>NAVER 地圖關鍵字／韓文地址（可留空）</label><input type="text" id="f-naver" placeholder="例如：제주 흑돼지거리" maxlength="80"></div>
+    <div class="sheet-actions">
+      <button class="btn btn-ghost" id="cancelBtn" type="button">取消</button>
+      <button class="btn btn-primary" id="saveBtn" type="button">加入行程</button>
+    </div>
+  </div>
+</div>
+
 <script>
+/* ===== 之後把 Firebase 設定貼進這裡，群組同步就會開啟（null = 本機模式）===== */
+const FIREBASE_CONFIG = null;
+/* ========================================================================= */
+
 const CAT = {
   meal:{label:"正餐",c:"var(--c-meal)"},
   cafe:{label:"咖啡·甜點",c:"var(--c-cafe)"},
@@ -267,64 +301,178 @@ const DAYS = [
     {t:"23:50",title:"落地台灣",cat:"trans"},
    ]},
 ];
-const legend=document.getElementById("legend");
-Object.values(CAT).forEach(c=>{const s=document.createElement("span");s.innerHTML=`<i class="swatch" style="background:${c.c}"></i>${c.label}`;legend.appendChild(s);});
 
-// 判斷今天是第幾天（旅途中自動跳到當天）
-const todayIdx=(function(){
-  try{
-    const now=new Date();
-    const key=(now.getMonth()+1)+"/"+now.getDate()+"（";
-    for(let i=0;i<DAYS.length;i++){if(DAYS[i].date.indexOf(key)===0)return i;}
-  }catch(e){}
-  return -1;
-})();
-const startIdx=todayIdx>=0?todayIdx:0;
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function pad2(n){return String(n).padStart(2,'0');}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function parseMin(t){const m=(t||'').match(/(\d{1,2}):(\d{2})/);return m?(+m[1])*60+(+m[2]):null;}
+function dayKeyOf(i){return DAYS[i].date.split('（')[0];}
+function genId(){return 'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 
-const tabs=document.getElementById("tabs"),daysEl=document.getElementById("days");
-DAYS.forEach((d,i)=>{
-  const tab=document.createElement("button");
-  tab.className="tab"+(i===startIdx?" active":"")+(i===todayIdx?" today":"");
-  tab.innerHTML=`<b>${d.n.replace("DAY ","D")}</b>${d.date.split("（")[0]}`+(i===todayIdx?`<span class="badge">今天</span>`:"");
-  tab.onclick=()=>show(i);tabs.appendChild(tab);
-  const day=document.createElement("section");
-  day.className="day"+(i===startIdx?" show":"");
-  let nowpill=(i===todayIdx)?`<div class="nowpill" id="nowpill">現在</div>`:"";
-  let html=`<div class="day-head"><div class="day-num">${d.n} · ${d.date}</div><div class="day-theme">${d.theme}</div><div class="day-sub">${d.sub}</div>${nowpill}</div><div class="tl">`;
-  d.items.forEach((it,idx)=>{
-    const cat=CAT[it.cat];
-    let meta=it.meta?`<div class="meta">`+it.meta.map(m=>`<div><span class="k">${m[0]}</span>：${m[1]}</div>`).join("")+`</div>`:"";
-    const price=it.price?`<div class="price">${it.price}</div>`:"";
-    const note=it.note?`<div class="note">${it.note}</div>`:"";
-    const naver=it.naver?`<div class="actions"><a class="naver" target="_blank" rel="noopener" href="https://map.naver.com/p/search/${encodeURIComponent(it.naver)}"><span class="n">NAVER</span> 地圖 ↗</a></div>`:"";
-    const tag=it.alt?`<span class="alt-tag">備選</span>`:`<span class="pill">${cat.label}</span>`;
-    const mm=(it.t||"").match(/(\d{1,2}):(\d{2})/);
-    const dataMin=mm?` data-min="${parseInt(mm[1],10)*60+parseInt(mm[2],10)}"`:"";
-    html+=`<div class="item" style="--dotc:${cat.c};--i:${idx}"${dataMin}><div class="time${it.t?'':' empty'}">${it.t||'彈性'}</div><div class="card${it.alt?' alt':''}"><div class="top"><div class="title">${it.title}</div>${tag}</div>${meta}${price}${note}${naver}</div></div>`;
-  });
-  html+=`</div>`;day.innerHTML=html;daysEl.appendChild(day);
-});
-function show(i){
-  document.querySelectorAll(".tab").forEach((t,k)=>t.classList.toggle("active",k===i));
-  document.querySelectorAll(".day").forEach((d,k)=>d.classList.toggle("show",k===i));
-  window.scrollTo({top:0,behavior:"smooth"});
+/* ---------- shared store (Firebase if configured, else localStorage) ---------- */
+const LS_KEY='jeju_custom_v1';
+let CUSTOM={};
+function lsLoad(){try{return JSON.parse(localStorage.getItem(LS_KEY))||{};}catch(e){return{};}}
+function lsSave(o){try{localStorage.setItem(LS_KEY,JSON.stringify(o));}catch(e){}}
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+
+const Store={
+  mode:'local', cb:()=>{},
+  init(cb){this.cb=cb; if(FIREBASE_CONFIG&&FIREBASE_CONFIG.apiKey){this._fb(cb);}else{this._local(cb);}},
+  _local(cb){this.mode='local';CUSTOM=lsLoad();cb();window.addEventListener('storage',e=>{if(e.key===LS_KEY){CUSTOM=lsLoad();cb();}});},
+  async _fb(cb){
+    try{
+      await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
+      await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js');
+      firebase.initializeApp(FIREBASE_CONFIG);
+      this.db=firebase.firestore();
+      try{await this.db.enablePersistence({synchronizeTabs:true});}catch(e){}
+      this.col=this.db.collection('jejuItems');
+      this.mode='firebase';
+      this.col.onSnapshot(snap=>{
+        CUSTOM={};
+        snap.forEach(d=>{const x=d.data();const dk=x.day;(CUSTOM[dk]=CUSTOM[dk]||[]).push({id:d.id,t:x.t||'',title:x.title||'',cat:x.cat||'sight',note:x.note||'',naver:x.naver||''});});
+        cb();
+      },err=>{console.warn('firestore error',err);});
+    }catch(e){console.warn('firebase unavailable, using local',e);this._local(cb);}
+  },
+  add(dayKey,item){
+    if(this.mode==='firebase'){this.col.add({day:dayKey,t:item.t,title:item.title,cat:item.cat,note:item.note,naver:item.naver,createdAt:firebase.firestore.FieldValue.serverTimestamp()});}
+    else{CUSTOM[dayKey]=CUSTOM[dayKey]||[];CUSTOM[dayKey].push(item);lsSave(CUSTOM);this.cb();}
+  },
+  remove(dayKey,id){
+    if(this.mode==='firebase'){this.col.doc(id).delete();}
+    else{CUSTOM[dayKey]=(CUSTOM[dayKey]||[]).filter(x=>x.id!==id);lsSave(CUSTOM);this.cb();}
+  }
+};
+
+/* ---------- calendar (.ics) ---------- */
+function icsEsc(s){return String(s==null?'':s).replace(/<[^>]+>/g,'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}
+function utcStamp(){const d=new Date();return d.getUTCFullYear()+pad2(d.getUTCMonth()+1)+pad2(d.getUTCDate())+'T'+pad2(d.getUTCHours())+pad2(d.getUTCMinutes())+pad2(d.getUTCSeconds())+'Z';}
+function vevent(dayIdx,item){
+  const md=dayKeyOf(dayIdx).split('/'); const mo=+md[0],da=+md[1];
+  const m=item.t.match(/(\d{1,2}):(\d{2})/); const h=+m[1],mi=+m[2];
+  const start=`2026${pad2(mo)}${pad2(da)}T${pad2(h)}${pad2(mi)}00`;
+  let tot=h*60+mi+60; if(tot>1439)tot=1439;
+  const end=`2026${pad2(mo)}${pad2(da)}T${pad2(Math.floor(tot/60))}${pad2(tot%60)}00`;
+  let loc='';
+  if(item.meta){const f=item.meta.find(x=>x[0].indexOf('地址')>=0);if(f)loc=f[1];}
+  if(!loc&&item.naver)loc=item.naver;
+  let desc=icsEsc(item.note||'');
+  if(item.naver)desc+=(desc?'\\n':'')+'NAVER 地圖: https://map.naver.com/p/search/'+encodeURIComponent(item.naver);
+  return ['BEGIN:VEVENT','UID:'+(item.id||('d'+dayIdx+'-'+start))+'@jeju-2026','DTSTAMP:'+utcStamp(),
+    'DTSTART;TZID=Asia/Seoul:'+start,'DTEND;TZID=Asia/Seoul:'+end,'SUMMARY:'+icsEsc(item.title),
+    loc?'LOCATION:'+icsEsc(loc):'','DESCRIPTION:'+desc,'END:VEVENT'].filter(Boolean).join('\r\n');
 }
-// 即時更新「現在」與「接下來」標記（僅當天）
+function buildICS(events){
+  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jeju 2026//Itinerary//ZH-Hant','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+    'BEGIN:VTIMEZONE','TZID:Asia/Seoul','BEGIN:STANDARD','DTSTART:19700101T000000','TZOFFSETFROM:+0900','TZOFFSETTO:+0900','TZNAME:KST','END:STANDARD','END:VTIMEZONE',
+    ...events,'END:VCALENDAR'].join('\r\n');
+}
+function downloadICS(name,text){
+  const blob=new Blob([text],{type:'text/calendar;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(isIOS){window.location.href=url;}
+  else{const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();}
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+}
+function addItemToCalendar(dayIdx,item){if(parseMin(item.t)==null)return;downloadICS('jeju-event.ics',buildICS([vevent(dayIdx,item)]));}
+function addDayToCalendar(dayIdx){
+  const evs=(MERGED[dayIdx]||[]).filter(it=>parseMin(it.t)!=null).map(it=>vevent(dayIdx,it));
+  if(!evs.length){alert('這天還沒有「有時間」的行程可以加入行事曆');return;}
+  downloadICS('jeju-'+DAYS[dayIdx].n.replace('DAY ','D')+'.ics',buildICS(evs));
+}
+
+/* ---------- render ---------- */
+const legend=$('legend');
+Object.values(CAT).forEach(c=>{const s=document.createElement('span');s.innerHTML=`<i class="swatch" style="background:${c.c}"></i>${c.label}`;legend.appendChild(s);});
+
+const todayIdx=(function(){try{const now=new Date();const key=(now.getMonth()+1)+'/'+now.getDate()+'（';for(let i=0;i<DAYS.length;i++){if(DAYS[i].date.indexOf(key)===0)return i;}}catch(e){}return -1;})();
+let current=todayIdx>=0?todayIdx:0;
+
+const tabsEl=$('tabs'),daysEl=$('days'),daySections=[],MERGED=[];
+DAYS.forEach((d,i)=>{
+  const tab=document.createElement('button');
+  tab.className='tab'+(i===current?' active':'')+(i===todayIdx?' today':'');
+  tab.innerHTML=`<b>${d.n.replace('DAY ','D')}</b>${d.date.split('（')[0]}`+(i===todayIdx?`<span class="badge">今天</span>`:'');
+  tab.onclick=()=>show(i);tabsEl.appendChild(tab);
+  const sec=document.createElement('section');
+  sec.className='day'+(i===current?' show':'');
+  sec.innerHTML=`<div class="day-head"><div class="day-num">${d.n} · ${d.date}</div><div class="day-theme">${d.theme}</div><div class="day-sub">${d.sub}</div><div class="day-tools">${i===todayIdx?`<span class="nowpill" id="nowpill">現在</span>`:''}<button class="daycal" type="button" data-d="${i}">＋ 整天加入行事曆</button></div></div><div class="tl"></div>`;
+  daysEl.appendChild(sec);daySections.push(sec);
+});
+
+function mergedItems(i){
+  const base=DAYS[i].items.map((it,idx)=>({...it,_base:true,_o:idx}));
+  let last=-1;
+  base.forEach(it=>{const mn=parseMin(it.t);if(mn!=null)last=mn;it._sort=(mn!=null?mn:last);it._sec=it._o;});
+  const dk=dayKeyOf(i);
+  const cust=(CUSTOM[dk]||[]).map((it,idx)=>{const mn=parseMin(it.t);return{...it,_base:false,_sort:(mn!=null?mn:1e9),_sec:100000+idx};});
+  const all=base.concat(cust);
+  all.sort((a,b)=>a._sort-b._sort||a._sec-b._sec);
+  return all;
+}
+function renderItems(i){
+  const all=mergedItems(i);MERGED[i]=all;const dk=dayKeyOf(i);let html='';
+  all.forEach((it,p)=>{
+    const cat=CAT[it.cat]||CAT.sight;
+    const meta=it.meta?`<div class="meta">`+it.meta.map(m=>`<div><span class="k">${m[0]}</span>：${m[1]}</div>`).join('')+`</div>`:'';
+    const price=it.price?`<div class="price">${it.price}</div>`:'';
+    let noteHtml='';if(it.note)noteHtml=it._base?it.note:esc(it.note).replace(/\n/g,'<br>');
+    const note=noteHtml?`<div class="note">${noteHtml}</div>`:'';
+    const naver=it.naver?`<a class="naver" target="_blank" rel="noopener" href="https://map.naver.com/p/search/${encodeURIComponent(it.naver)}"><span class="n">NAVER</span> 地圖 ↗</a>`:'';
+    const timed=parseMin(it.t)!=null;
+    const cal=timed?`<button class="cal" type="button">＋行事曆</button>`:'';
+    const acts=(naver||cal)?`<div class="actions">${naver}${cal}</div>`:'';
+    const del=!it._base?`<button class="del" type="button" data-key="${dk}" data-id="${esc(it.id)}" aria-label="刪除">✕</button>`:'';
+    const tag=it.alt?`<span class="alt-tag">備選</span>`:(!it._base?`<span class="cust-tag">自訂</span>`:`<span class="pill">${cat.label}</span>`);
+    const dmin=timed?` data-min="${parseMin(it.t)}"`:'';
+    html+=`<div class="item" style="--dotc:${cat.c}" data-d="${i}" data-p="${p}"${dmin}><div class="time${it.t?'':' empty'}">${it.t||'彈性'}</div><div class="card${it.alt?' alt':''}${!it._base?' cust':''}"><div class="top"><div class="title">${esc(it.title)}</div>${tag}${del}</div>${meta}${price}${note}${acts}</div></div>`;
+  });
+  daySections[i].querySelector('.tl').innerHTML=html;
+}
+
+function show(i){current=i;document.querySelectorAll('.tab').forEach((t,k)=>t.classList.toggle('active',k===i));daySections.forEach((d,k)=>d.classList.toggle('show',k===i));window.scrollTo({top:0,behavior:'smooth'});}
+
 function refreshNow(){
   if(todayIdx<0)return;
-  const now=new Date();
-  const cur=now.getHours()*60+now.getMinutes();
-  const np=document.getElementById("nowpill");
-  if(np){const hh=String(now.getHours()).padStart(2,"0"),mm=String(now.getMinutes()).padStart(2,"0");np.textContent="現在 "+hh+":"+mm;}
-  const day=document.querySelectorAll(".day")[todayIdx];
-  if(!day)return;
-  day.querySelectorAll(".item.next").forEach(el=>el.classList.remove("next"));
-  const items=Array.prototype.slice.call(day.querySelectorAll(".item[data-min]"));
-  let next=null;
-  for(let k=0;k<items.length;k++){if(parseInt(items[k].getAttribute("data-min"),10)>=cur){next=items[k];break;}}
-  if(next)next.classList.add("next");
+  const now=new Date();const cur=now.getHours()*60+now.getMinutes();
+  const np=$('nowpill');if(np)np.textContent='現在 '+pad2(now.getHours())+':'+pad2(now.getMinutes());
+  const day=daySections[todayIdx];if(!day)return;
+  day.querySelectorAll('.item.next').forEach(el=>el.classList.remove('next'));
+  const items=Array.prototype.slice.call(day.querySelectorAll('.item[data-min]'));
+  for(let k=0;k<items.length;k++){if(parseInt(items[k].getAttribute('data-min'),10)>=cur){items[k].classList.add('next');break;}}
 }
-refreshNow();
+
+/* delegated clicks for calendar / delete */
+daysEl.addEventListener('click',e=>{
+  const calB=e.target.closest('.cal');if(calB){const it=e.target.closest('.item');addItemToCalendar(+it.dataset.d,MERGED[+it.dataset.d][+it.dataset.p]);return;}
+  const dayB=e.target.closest('.daycal');if(dayB){addDayToCalendar(+dayB.dataset.d);return;}
+  const delB=e.target.closest('.del');if(delB){if(confirm('刪除這個自訂行程？'))Store.remove(delB.dataset.key,delB.dataset.id);return;}
+});
+
+/* ---------- add-item modal ---------- */
+const modal=$('modal');
+(function(){const sd=$('f-day');DAYS.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d.n.replace('DAY ','D')+' '+d.date;sd.appendChild(o);});})();
+(function(){const sc=$('f-cat');Object.keys(CAT).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=CAT[k].label;sc.appendChild(o);});})();
+function updateSync(){const on=Store.mode==='firebase';const s=$('syncState');s.textContent=on?'雲端同步中 · 全團共看':'本機儲存（此手機）';s.className='sync-state '+(on?'sync-on':'sync-off');$('modalHint').textContent=on?'加到共用行程，全團都會看到':'目前只存在這支手機；連結雲端後才會同步給團員';}
+function openModal(){$('f-day').value=current;$('f-time').value='';$('f-title').value='';$('f-cat').value='sight';$('f-note').value='';$('f-naver').value='';updateSync();modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(()=>$('f-title').focus(),60);}
+function closeModal(){modal.classList.remove('open');document.body.style.overflow='';}
+$('fab').onclick=openModal;$('cancelBtn').onclick=closeModal;
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+$('saveBtn').onclick=()=>{
+  const title=$('f-title').value.trim();if(!title){$('f-title').focus();return;}
+  const dayIdx=+$('f-day').value;
+  const item={id:genId(),t:$('f-time').value||'',title,cat:$('f-cat').value,note:$('f-note').value.trim(),naver:$('f-naver').value.trim()};
+  Store.add(dayKeyOf(dayIdx),item);
+  closeModal();show(dayIdx);
+};
+
+/* ---------- boot ---------- */
+function onData(){DAYS.forEach((_,i)=>renderItems(i));refreshNow();updateSync();}
+Store.init(onData);
 setInterval(refreshNow,30000);
 </script>
 </body>
